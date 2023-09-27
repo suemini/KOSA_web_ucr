@@ -7,8 +7,8 @@
     <setting name="mapUnderscoreToCamelCase" value="true"/>
   </settings>
   
-  <typeAliases>
-  	<typeAlias type="com.my.customer.dto.Customer" alias="Customer"/>
+  <typeAliases> <!--dto별칭주기-->
+  	<typeAlias type="com.kosa.ucr.wishlist.dto.Wishlist" alias="Wishlist"/>
   </typeAliases>
 
   <environments default="development">
@@ -23,10 +23,8 @@
     </environment>
   </environments>
 
-  <mappers>
-    <mapper resource="com/my/sql/Customer.xml"/>
-    <mapper resource="com/my/sql/Product.xml"/>
-    <mapper resource="com/my/sql/Order.xml"/>
+  <mappers> <!--xml파일경로설정-->
+    <mapper resource="com/kosa/ucr/sql/Wish.xml"/>
   </mappers>
 
 </configuration>
