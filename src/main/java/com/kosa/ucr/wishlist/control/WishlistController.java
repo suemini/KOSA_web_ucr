@@ -1,10 +1,12 @@
-package com.kosa.ucr.control;
+package com.kosa.ucr.wishlist.control;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kosa.ucr.control.Controller;
 
 public class WishlistController implements Controller {
 

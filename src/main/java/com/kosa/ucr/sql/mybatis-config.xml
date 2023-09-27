@@ -24,7 +24,7 @@
   </environments>
 
   <mappers> <!--xml파일경로설정-->
-    <mapper resource="com/kosa/ucr/sql/Wish.xml"/>
+    <mapper resource="com/kosa/ucr/sql/Wishlist.xml"/>
   </mappers>
 
 </configuration>

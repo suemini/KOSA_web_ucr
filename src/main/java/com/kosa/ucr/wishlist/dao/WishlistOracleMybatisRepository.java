@@ -26,11 +26,11 @@ public class WishlistOracleMybatisRepository implements WishlistRepository {
 	}
 
 	@Override
-	public void insert(Wishlist wish) throws AddException {
+	public void insertWishlist(Wishlist wish) throws AddException {
 		SqlSession session = null;
 		try {
 			session = sqlSessionFactory.openSession();
-			session.insert("com.kosa.ucr.wish.WishMapper.insert", wish); //wishController, wishlistController 구분위해 wish.xml로 만듬
+			session.insert("com.kosa.ucr.wishlist.WishlistMapper.insertWishlist", wish); //wishController, wishlistController 구분위해 wish.xml로 만듬
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

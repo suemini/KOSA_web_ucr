@@ -74,7 +74,7 @@ public class DispatcherServlet extends HttpServlet {
 			e1.printStackTrace();
 		} */
 		
-		/* java.lang.reflect.InvocationTargetException
+		/* java.lang.reflect.InvocationTargetException */
 		try {
 			Class<?> clazz = Class.forName(className);//클래스이름에 해당하는 .class파일 찾아서 JVM으로 로드
 			
@@ -92,7 +92,7 @@ public class DispatcherServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} */
+		} 
 	}
 
 }

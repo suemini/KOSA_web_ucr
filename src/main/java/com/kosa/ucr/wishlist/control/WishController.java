@@ -1,5 +1,6 @@
-package com.kosa.ucr.control;
+package com.kosa.ucr.wishlist.control;
 
+import com.kosa.ucr.control.Controller;
 import com.kosa.ucr.wishlist.service.WishlistService;
 
 public abstract class WishController implements Controller {

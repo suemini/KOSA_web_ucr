@@ -10,5 +10,5 @@ public interface WishlistRepository {
 	 * @param stuId 학번
 	 * @throws AddException DB연결 실패 또는 추가실패 시 예외발생
 	 */
-	void insert(Wishlist wish) throws AddException;
+	void insertWishlist(Wishlist wish) throws AddException;
 }
