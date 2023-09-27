@@ -55,8 +55,8 @@ public class AddWishlistController extends WishController {
 		//stuId의 학생이 coCode를 갖고 있지 않은 경우에만 추가할 필요 없음 어차피 이전에 한 거 있으면 당연히 세션 다를테니까
 		
 		Wishlist wl = new Wishlist();
-		wl.setStuId(stuId);
-		wl.setCoCode(coCode);
+//		wl.setStuId(stuId);
+//		wl.setCoCode(coCode);
 		try {
 			service.addWishlist(wl);
 			map.put("status", 1);
