@@ -5,10 +5,13 @@
 <configuration>
   <settings>
     <setting name="mapUnderscoreToCamelCase" value="true"/>
+  <setting name="logImpl" value="STDOUT_LOGGING"/>
   </settings>
   
   <typeAliases>
-  	<typeAlias type="com.my.customer.dto.Customer" alias="Customer"/>
+  	<typeAlias type="com.kosa.ucr.course.dto.Course" alias="Course"/>
+  	<typeAlias type="com.kosa.ucr.course.dto.Major" alias="Major"/>
+    <typeAlias type="com.kosa.ucr.user.dto.Professor" alias="Professor"/>
   </typeAliases>
 
   <environments default="development">
@@ -24,9 +27,7 @@
   </environments>
 
   <mappers>
-    <mapper resource="com/my/sql/Customer.xml"/>
-    <mapper resource="com/my/sql/Product.xml"/>
-    <mapper resource="com/my/sql/Order.xml"/>
+    <mapper resource="com/kosa/ucr/sql/SearchCourse.xml"/>
   </mappers>
 
 </configuration>
