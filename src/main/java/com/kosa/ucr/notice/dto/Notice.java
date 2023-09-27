@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter @Getter
 public class Notice {
 	int noticeNo;
+	String title;
 	String contents;
-
-
 }

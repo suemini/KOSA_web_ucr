@@ -1,4 +1,6 @@
-package com.kosa.ucr.professor.dto;
+package com.kosa.ucr.user.dto;
+
+import com.kosa.ucr.course.dto.Major;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,5 +16,5 @@ public class Professor {
 	String proIdenNum;
 	String proEmail;
 	String proPhone;
-
+	Major mName;
 }

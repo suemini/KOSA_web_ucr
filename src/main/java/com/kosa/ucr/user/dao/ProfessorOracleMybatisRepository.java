@@ -1,4 +1,4 @@
-package com.kosa.ucr.professor.dao;
+package com.kosa.ucr.user.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,7 +7,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class ProfessorOracleMybatisRepository implements ProfessorRepository {
+public class ProfessorOracleMybatisRepository implements UserRepository {
 	private SqlSessionFactory sqlSessionFactory;
 
 	public ProfessorOracleMybatisRepository() {

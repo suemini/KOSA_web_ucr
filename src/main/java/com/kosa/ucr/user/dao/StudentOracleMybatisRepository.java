@@ -1,4 +1,4 @@
-package com.kosa.ucr.login.dao;
+package com.kosa.ucr.user.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,10 +7,10 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class LoginOracleMybatisRepository implements LoginRepository {
+public class StudentOracleMybatisRepository implements UserRepository {
 	private SqlSessionFactory sqlSessionFactory;
 
-	public LoginOracleMybatisRepository() {
+	public StudentOracleMybatisRepository() {
 		String resource = "com/kosa/ucr/sql/mybatis-config.xml";
 		InputStream inputStream;
 		try {

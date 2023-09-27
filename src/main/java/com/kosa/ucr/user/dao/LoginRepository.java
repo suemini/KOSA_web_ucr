@@ -1,4 +1,4 @@
-package com.kosa.ucr.login.dao;
+package com.kosa.ucr.user.dao;
 
 public interface LoginRepository {
 
