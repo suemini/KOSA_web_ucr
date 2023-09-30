@@ -32,12 +32,13 @@ public class WishlistOracleMybatisRepository implements WishlistRepository {
 			Wishlist wl = new Wishlist();
 			wl.setCoCode(coCode);
 			wl.setStuId(stuId);
+			System.out.println(wl.getCoCode()+":"+wl.getStuId());
 			session = sqlSessionFactory.openSession();
 			session.insert("com.kosa.ucr.wishlist.WishlistMapper.insertWishlist", wl);
 			session.commit();
 		} catch (Exception e) {
-			e.printStackTrace();
 			session.rollback();
+			e.printStackTrace();
 			throw new AddException(e.getMessage());
 		} finally {
 			if(session != null) {
