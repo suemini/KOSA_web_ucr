@@ -22,11 +22,11 @@ public class MyConnection {
 		//JDBC드라이버로드
 		Class.forName("oracle.jdbc.OracleDriver");	
 		//DB연결
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";	
+		String url = "jdbc:oracle:thin:@172.30.1.1:1521:xe";	
 		String user = "ucr";
 		String password = "ucr";
 		return DriverManager.getConnection(url, user, password);
-		
+	
 	}
 	
 	

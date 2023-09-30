@@ -2,7 +2,6 @@ package com.kosa.ucr.control;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Properties;
 
@@ -48,7 +47,7 @@ public class DispatcherServlet extends HttpServlet {
 		System.out.println(className);
 		
 		//singleton으로 맞춘 경우
-		/* java.lang.ExceptionInInitializerError*/
+		/* java.lang.ExceptionInInitializerError
 		try {
 			Class<?> clazz = Class.forName(className); 
 			Controller controller;
@@ -73,9 +72,9 @@ public class DispatcherServlet extends HttpServlet {
 		    }
 		} catch (Exception e1) {
 			e1.printStackTrace();
-		} 
+		} */
 		
-		/* java.lang.reflect.InvocationTargetException 
+		/* java.lang.reflect.InvocationTargetException */
 		try {
 			Class<?> clazz = Class.forName(className);//클래스이름에 해당하는 .class파일 찾아서 JVM으로 로드
 			
@@ -93,7 +92,7 @@ public class DispatcherServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} */
+		} 
 		/* Controller 싱글톤으로 안 맞춰준 경우
 		try {
 			Class clazz = Class.forName(className); //클래스이름에 해당하는 .class파일 찾아서 JVM으로 로드

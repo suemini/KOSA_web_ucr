@@ -15,6 +15,6 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor
 @Setter @Getter
 public class Wishlist {
-	String coCode; //Course의 coCode로 하면 dao에서 wl.set이 안됨
-	int stuId; //(insertWishlit메서드 매개변수와 타입이 안 맞아서)
+	List<Course> courses; 
+	Student stuId; 
 }
