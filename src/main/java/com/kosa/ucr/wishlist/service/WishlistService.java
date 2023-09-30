@@ -16,7 +16,7 @@ public class WishlistService {
 		return service;
 	}
 	
-	public void addWishlist(Wishlist wish) throws AddException {
-		repository.insertWishlist(wish);
+	public void addWishlist(String coCode, int stuId) throws AddException {
+		repository.insertWishlist(coCode, stuId);
 	}
 }

@@ -2,6 +2,7 @@ package com.kosa.ucr.control;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Properties;
 
@@ -39,7 +40,7 @@ public class DispatcherServlet extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.14:5500");
+		response.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
 		response.setHeader("Access-Control-Allow-Credentials", "true");
 		
 		System.out.println("request.getServletPath()=" + request.getServletPath());
@@ -47,7 +48,7 @@ public class DispatcherServlet extends HttpServlet {
 		System.out.println(className);
 		
 		//singleton으로 맞춘 경우
-		/* java.lang.ExceptionInInitializerError
+		/* java.lang.ExceptionInInitializerError*/
 		try {
 			Class<?> clazz = Class.forName(className); 
 			Controller controller;
@@ -72,9 +73,9 @@ public class DispatcherServlet extends HttpServlet {
 		    }
 		} catch (Exception e1) {
 			e1.printStackTrace();
-		} */
+		} 
 		
-		/* java.lang.reflect.InvocationTargetException */
+		/* java.lang.reflect.InvocationTargetException 
 		try {
 			Class<?> clazz = Class.forName(className);//클래스이름에 해당하는 .class파일 찾아서 JVM으로 로드
 			
@@ -92,7 +93,16 @@ public class DispatcherServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		} */
+		/* Controller 싱글톤으로 안 맞춰준 경우
+		try {
+			Class clazz = Class.forName(className); //클래스이름에 해당하는 .class파일 찾아서 JVM으로 로드
+			Controller controller = (Controller)clazz.getDeclaredConstructor().newInstance(); 
+			//clazz.newInstance(); //지금 로드된 클래스타입의 객체생성 newInstance디프리케이티드돼서 위로 바꿈
+			controller.execute(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
 	}
 
 }

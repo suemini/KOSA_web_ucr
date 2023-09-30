@@ -13,9 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosa.ucr.exception.AddException;
-import com.kosa.ucr.wishlist.dto.Wishlist;
 
-public class AddWishlistController extends WishController {
+public class AddWishlistController extends WishlistController {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
@@ -54,11 +53,8 @@ public class AddWishlistController extends WishController {
 		//5. 요청전달데이터 상품번호를 Key, 수량을 value로 어트리뷰트의 요소로 추가한다
 		//stuId의 학생이 coCode를 갖고 있지 않은 경우에만 추가할 필요 없음 어차피 이전에 한 거 있으면 당연히 세션 다를테니까
 		
-		Wishlist wl = new Wishlist();
-//		wl.setStuId(stuId);
-//		wl.setCoCode(coCode);
 		try {
-			service.addWishlist(wl);
+			service.addWishlist(coCode, stuId);
 			map.put("status", 1);
 			map.put("msg", "희망강좌 수강신청 성공");
 		} catch (AddException e) {

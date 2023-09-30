@@ -1,20 +1,11 @@
 package com.kosa.ucr.wishlist.control;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.kosa.ucr.control.Controller;
+import com.kosa.ucr.wishlist.service.WishlistService;
 
-public class WishlistController implements Controller {
-
-	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+public abstract class WishlistController implements Controller {
+	protected WishlistService service;
+	public WishlistController() {
+		service = WishlistService.getInstance();
+	} //singleton으로 맞추면서 만든 메서드 가져옴
 }

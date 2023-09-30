@@ -1,7 +1,6 @@
 package com.kosa.ucr.wishlist.dao;
 
 import com.kosa.ucr.exception.AddException;
-import com.kosa.ucr.wishlist.dto.Wishlist;
 
 public interface WishlistRepository {
 	/***
@@ -10,5 +9,5 @@ public interface WishlistRepository {
 	 * @param stuId 학번
 	 * @throws AddException DB연결 실패 또는 추가실패 시 예외발생
 	 */
-	void insertWishlist(Wishlist wish) throws AddException;
+	void insertWishlist(String coCode, int stuId) throws AddException;
 }
