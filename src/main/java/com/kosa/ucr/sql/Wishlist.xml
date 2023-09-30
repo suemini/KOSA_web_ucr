@@ -7,4 +7,9 @@
 		 INSERT INTO wishlist(co_code, stu_id)
 		 VALUES (#{coCode}, #{stuId})
 	</insert>
+	
+	<delete id="deleteWishlist" parameterType="java.util.Map">
+		 DELETE FROM wishlist
+		 WHERE (co_code=#{coCode} and stu_id=#{stuId})
+	</delete>
 </mapper>

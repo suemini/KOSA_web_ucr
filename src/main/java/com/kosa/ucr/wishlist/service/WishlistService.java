@@ -1,6 +1,7 @@
 package com.kosa.ucr.wishlist.service;
 
 import com.kosa.ucr.exception.AddException;
+import com.kosa.ucr.exception.RemoveException;
 import com.kosa.ucr.wishlist.dao.WishlistOracleMybatisRepository;
 import com.kosa.ucr.wishlist.dao.WishlistRepository;
 
@@ -17,5 +18,9 @@ public class WishlistService {
 	
 	public void addWishlist(String coCode, int stuId) throws AddException {
 		repository.insertWishlist(coCode, stuId);
+	}
+	
+	public void removeWishlist(String coCode, int stuId) throws RemoveException{
+		repository.deleteWishlist(coCode, stuId);
 	}
 }
