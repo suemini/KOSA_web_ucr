@@ -10,17 +10,17 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor
 @Setter @Getter
 public class Course {
-	String coCode;
-	String coName;
-	int coYear;
-	int coLimit;
-	int coCredit;
-	String classroom;
-	String division;
-	String coDay;
-	String coTime;
-	int regiCnt;
-	Major mName;
+	private String coCode;
+	private String coName;
+	private int coYear;
+	private int coLimit;
+	private int coCredit;
+	private String classroom;
+	private String division;
+	private String coDay;
+	private String coTime;
+	private int regiCnt;
+	private Major coMajorName;
 	//String mName; 위에 방법으로 has a관계 나타내기
-	Professor proName;
+	private Professor coProName;
 }

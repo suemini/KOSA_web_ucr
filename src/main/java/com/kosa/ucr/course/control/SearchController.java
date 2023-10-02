@@ -38,7 +38,6 @@ public class SearchController extends CourseController{
 		    condition = "INSTR(co_day, '" + coDay + "') > 0";
 		} 
 		
-		System.out.print(proName+ mName+ coName+coDay );
 		try {
 		    Map<String, String> params = new HashMap<>();
 		    params.put("condition", condition);

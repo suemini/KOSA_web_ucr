@@ -10,11 +10,11 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor
 @Setter @Getter
 public class Professor {
-	int proId;
-	String proPwd;
-	String proName;
-	String proIdenNum;
-	String proEmail;
-	String proPhone;
-	Major mName;
+	private int proId;
+	private String proPwd;
+	private String proName;
+	private String proIdenNum;
+	private String proEmail;
+	private String proPhone;
+	private Major coMajorName;
 }

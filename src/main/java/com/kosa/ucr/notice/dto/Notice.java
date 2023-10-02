@@ -8,7 +8,7 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor
 @Setter @Getter
 public class Notice {
-	int noticeNo;
-	String title;
-	String contents;
+	private int noticeNo;
+	private String title;
+	private String contents;
 }

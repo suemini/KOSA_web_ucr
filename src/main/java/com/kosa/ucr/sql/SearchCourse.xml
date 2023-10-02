@@ -3,32 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.kosa.ucr.course.SearchCourseMapper">
-   
+  <mapper namespace="com.kosa.ucr.course.SearchCourseMapper"> 
 	<resultMap type="Course" id="CourseMap" autoMapping="true">
-    <id property="coCode" column="co_code"></id>
-    <result property="coName" column="co_name"/>
-    <result property="coYear" column="co_year"/>
-    <result property="coLimit" column="co_limit"/>
-    <result property="coCredit" column="co_credit"/>
- 	<result property="classroom" column="classroom"/>
-    <result property="division" column="division"/>
-    <result property="coDay" column="co_day"/>
-    <result property="coTime" column="co_time"/>      
-    <result property="regiCnt" column="regi_cnt"/>                  
-    <association property="mName" javaType="Major">
-        <id property="mNo" column="m_no"/>
+    <id property="coCode" column="co_code"></id>              
+    <association property="coMajorName" javaType="Major" autoMapping="true">
     </association>
-    <association property="proName" javaType="Professor">
-        <id property="proName" column="pro_name"/>
+    <association property="coProName" javaType="Professor" autoMapping="true">
     </association>
 </resultMap>
 
-
-  
-<select id="searchCourses" resultType="Course">
-    SELECT c.co_code, co_name, co_year, co_limit, co_credit, co_day, co_time, classroom, 
-           division, m.m_name AS mName, p.pro_name AS proName
+<select id="searchCourses" resultMap="CourseMap">
+    SELECT c.co_code, co_name, co_year, co_limit, co_credit, co_day, co_time, classroom, division, regi_cnt,
+		   m.m_no, m.m_name, m_uni, p.pro_name, p.pro_id, pro_pwd, pro_iden_num, pro_email, pro_phone
     FROM course c
     JOIN major m ON (m.m_no=c.m_no)
     LEFT JOIN procourse pc ON (c.co_code=pc.co_code)
@@ -38,8 +24,5 @@
             AND ${condition}
         </if>
     </where>
-</select>
-
-  
-  
+</select> 
   </mapper>

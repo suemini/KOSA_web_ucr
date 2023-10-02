@@ -10,13 +10,13 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor
 @Setter @Getter
 public class Student {
-	int stuId;
-	String stuPwd;
-	String stuName;
-	String stuIdenNum;
-	String stuEmail;
-	String stuPhone;
-	int stuCredits;
-	int stuGrades;
-	Major mName;
+	private int stuId;
+	private String stuPwd;
+	private String stuName;
+	private String stuIdenNum;
+	private String stuEmail;
+	private String stuPhone;
+	private int stuCredits;
+	private int stuGrades;
+	private Major coMajorName;
 }
