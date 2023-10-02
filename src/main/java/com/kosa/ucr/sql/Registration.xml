@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosa.ucr.registration.RegistrationMapper">
+	<insert id="insertRegistration" parameterType="java.util.Map">
+		 INSERT INTO registration(co_code, stu_id)
+		 VALUES (#{coCode}, #{stuId})
+	</insert>
+	
+	<delete id="deleteRegistration" parameterType="java.util.Map">
+		 DELETE FROM registration
+		 WHERE (co_code=#{coCode} and stu_id=#{stuId})
+	</delete>
+</mapper>
