@@ -2,28 +2,27 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kosa.ucr.wishlist.WishlistMapper">
-	<insert id="insertWishlist" parameterType="java.util.Map">
-		 INSERT INTO wishlist(co_code, stu_id)
+<mapper namespace="com.kosa.ucr.registration.RegistrationMapper">
+	<insert id="insertRegistration" parameterType="java.util.Map">
+		 INSERT INTO registration(co_code, stu_id)
 		 VALUES (#{coCode}, #{stuId})
 	</insert>
 	
-	<delete id="deleteWishlist" parameterType="java.util.Map">
-		 DELETE FROM wishlist
+	<delete id="deleteRegistration" parameterType="java.util.Map">
+		 DELETE FROM registration
 		 WHERE (co_code=#{coCode} and stu_id=#{stuId})
 	</delete>
-	
 	<resultMap id="CourseMap" type="Course" autoMapping="true">	
 			<association property="coProName" javaType="com.kosa.ucr.user.dto.Professor" autoMapping="true"/>
 			<association property="coMajorName" javaType="com.kosa.ucr.course.dto.Major" autoMapping="true"/>
 	</resultMap>
-	<select id="selectByWishlist" resultMap="CourseMap">
+	<select id="selectByRegistration" resultMap="CourseMap">
 		SELECT c.co_code, co_name, co_year, co_limit, co_credit, co_day, co_time, classroom, division, regi_cnt,
         		m.m_no, m.m_name, m.m_uni, p.pro_name, p.pro_id, p.pro_pwd, p.pro_iden_num, p.pro_email, p.pro_phone
-		FROM wishlist w join course c on(w.co_code=c.co_code)
+		FROM registration r join course c on(r.co_code=c.co_code)
              	   left join procourse pc on (pc.co_code=c.co_code)
                			join major m on (m.m_no=c.m_no)
               	   left join professor p on (p.pro_id=pc.pro_id)
-		WHERE w.stu_id=#{stuId}
+		WHERE r.stu_id=#{stuId}
 	</select> 
 </mapper>

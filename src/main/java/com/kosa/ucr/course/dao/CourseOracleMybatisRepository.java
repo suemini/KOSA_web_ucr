@@ -82,7 +82,7 @@ public class CourseOracleMybatisRepository implements CourseRepository{
 		try {
 			session = sqlSessionFactory.openSession();
 			List<Student> students = new ArrayList<>();
-			students = session.selectList("com.kosa.ucr.user.dto.StudentMapper.selectByCourse", coCode);
+			students = session.selectList("com.kosa.ucr.course.StudentListMapper.selectByCourse", coCode);
 			if (students != null) {
 				return students;
 			} else {
