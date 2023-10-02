@@ -16,10 +16,12 @@ public class WishlistService {
 		return service;
 	}
 	
+	//addWishlist
 	public void addWishlist(String coCode, int stuId) throws AddException {
 		repository.insertWishlist(coCode, stuId);
 	}
 	
+	//removeWishlist
 	public void removeWishlist(String coCode, int stuId) throws RemoveException{
 		repository.deleteWishlist(coCode, stuId);
 	}
