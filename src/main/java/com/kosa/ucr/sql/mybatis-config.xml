@@ -31,7 +31,7 @@
 
   <mappers> <!--xml파일경로설정-->
     <mapper resource="com/kosa/ucr/sql/Wishlist.xml"/>
-    <mapper resource="com/kosa/ucr/sql/Course.xml"/>
+    <mapper resource="com/kosa/ucr/sql/ProfessorCourse.xml"/>
     <mapper resource="com/kosa/ucr/sql/Student.xml"/>
   </mappers>
 

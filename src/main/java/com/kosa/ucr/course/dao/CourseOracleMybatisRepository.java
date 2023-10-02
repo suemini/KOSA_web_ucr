@@ -34,7 +34,7 @@ public class CourseOracleMybatisRepository implements CourseRepository {
 		try {
 			session = sqlSessionFactory.openSession();
 			List<Course> courses = new ArrayList<>();
-			courses = session.selectList("com.kosa.ucr.Course.CourseMapper.selectByProfessor", proId);
+			courses = session.selectList("com.kosa.ucr.Course.ProfessorCourseMapper.selectByProfessor", proId);
 			if (courses != null) {
 //				for(Course course: courses) { //근데 또 line에서는 oderp이렇게 안받던데
 //					Professor proName = course.getProName();
