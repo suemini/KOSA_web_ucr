@@ -3,6 +3,7 @@ package com.kosa.ucr.registration.dao;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
@@ -10,7 +11,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.kosa.ucr.course.dto.Course;
 import com.kosa.ucr.exception.AddException;
+import com.kosa.ucr.exception.FindException;
 import com.kosa.ucr.exception.RemoveException;
 
 public class RegistrationOracleMybatisRepository implements RegistrationRepository {
@@ -69,5 +72,26 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 			}
 		}
 		
+	}
+
+	@Override
+	public List<Course> selectByRegistration(int stuId) throws FindException {
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			List<Course> list = session.selectList("com.kosa.ucr.registration.RegistrationMapper.selectByRegistration", stuId);
+	        if (list.isEmpty()) {
+	            throw new FindException("수강강좌가 없습니다");
+	        }
+//	        System.out.println(list.get(0).getCoCode() + ":" +    list.get(0).getCoMajorName());
+	        return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new FindException("강좌 검색 중 오류 발생: " + e.getMessage());
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
 	}
 }

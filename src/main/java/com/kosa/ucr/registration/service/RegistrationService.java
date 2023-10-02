@@ -1,6 +1,10 @@
 package com.kosa.ucr.registration.service;
 
+import java.util.List;
+
+import com.kosa.ucr.course.dto.Course;
 import com.kosa.ucr.exception.AddException;
+import com.kosa.ucr.exception.FindException;
 import com.kosa.ucr.exception.RemoveException;
 import com.kosa.ucr.registration.dao.RegistrationOracleMybatisRepository;
 import com.kosa.ucr.registration.dao.RegistrationRepository;
@@ -25,5 +29,10 @@ public class RegistrationService {
 	//removeWishlist
 	public void removeRegistration(String coCode, int stuId) throws RemoveException{
 		repository.deleteRegistration(coCode, stuId);
+	}
+	
+	//findByRegistraion
+	public List<Course> findByRegistration(int stuId) throws FindException{
+		return repository.selectByRegistration(stuId);
 	}
 }
