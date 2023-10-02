@@ -6,14 +6,8 @@
 	<resultMap id="StudentMap" type="Student" autoMapping="true">
 		<!-- 기존 것 맵핑 -->
 		<id property="stuId" column="stu_id"/>
-		<result property="stuName" column="stu_name"/>
-		<result property="stuEmail" column="stu_email"/>
-		<result property="stuPhone" column="stu_phone"/>
-		<result property="stuGrades" column="stu_grades"/>
 			<!-- major엔티티와 1:1 관계 맵핑 -->
-			<association property="mName" javaType="com.kosa.ucr.course.dto.Major" autoMapping="true">
-    			<id property="mName" column="m_name"/>
-			</association>
+			<association property="mName" javaType="com.kosa.ucr.course.dto.Major" autoMapping="true"/>
 			
 	</resultMap>
 	<select id="selectByCourse" resultMap="StudentMap">

@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosa.ucr.Course.ProfessorCourseMapper">
 	<resultMap id="CourseMap" type="Course" autoMapping="true">
-		<!-- 기존 것 맵핑 -->
+		<!-- 기존 것 맵핑
 		<id property="coCode" column="co_Code"/>
 		<result property="coName" column="co_name"/>
 		<result property="coYear" column="co_year"/>
@@ -13,15 +13,15 @@
 		<result property="coDay" column="co_day"/>
 		<result property="coTime" column="co_time"/>
 		<result property="classroom" column="classroom"/>
-		<result property="division" column="division"/>
+		<result property="division" column="division"/> -->
 			<!-- professor, major엔티티와 1:1 관계 맵핑 -->
-			<association property="proName" javaType="com.kosa.ucr.user.dto.Professor" autoMapping="true">
-    			<id property="proName" column="pro_name"/>
-			</association>
+			<association property="proName" javaType="com.kosa.ucr.user.dto.Professor" autoMapping="true"/>
+    			<!-- <id property="proName" column="pro_name"/>
+			</association> -->
 
-			<association property="mName" javaType="com.kosa.ucr.course.dto.Major" autoMapping="true">
-    			<id property="mName" column="m_name"/>
-			</association>
+			<association property="mName" javaType="com.kosa.ucr.course.dto.Major" autoMapping="true"/>
+    		<!-- 	<id property="mName" column="m_name"/>
+			</association> -->
 			
 	</resultMap>
 	<select id="selectByProfessor" resultMap="CourseMap">
@@ -31,5 +31,5 @@
 							join major m on (m.m_no=c.m_no)
 							join professor p on (p.pro_id=pc.pro_id)
 		WHERE p.pro_id=#{proId}
-	</select> <!-- 원래 WHERE절 ${condition}인데 어려워서 여쭤보고 할 예정 -->
+	</select> 
 </mapper>
