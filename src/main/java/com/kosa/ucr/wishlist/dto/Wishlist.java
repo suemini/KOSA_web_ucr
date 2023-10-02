@@ -15,6 +15,6 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor
 @Setter @Getter
 public class Wishlist {
-	List<Course> courses;
-	Student stuId;
+	private List<Course> courses; 
+	private Student stuId; 
 }

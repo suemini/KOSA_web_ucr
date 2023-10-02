@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosa.ucr.Course.ProfessorCourseMapper">
+	<resultMap id="CourseMap" type="Course" autoMapping="true">
+		<!-- 기존 것 맵핑
+		<id property="coCode" column="co_Code"/>
+		<result property="coName" column="co_name"/>
+		<result property="coYear" column="co_year"/>
+		<result property="coLimit" column="co_limit"/>
+		<result property="coCredit" column="co_credit"/>
+		<result property="coDay" column="co_day"/>
+		<result property="coTime" column="co_time"/>
+		<result property="classroom" column="classroom"/>
+		<result property="division" column="division"/> -->
+			<!-- professor, major엔티티와 1:1 관계 맵핑 -->
+			<association property="proName" javaType="com.kosa.ucr.user.dto.Professor" autoMapping="true"/>
+    			<!-- <id property="proName" column="pro_name"/>
+			</association> -->
+
+			<association property="mName" javaType="com.kosa.ucr.course.dto.Major" autoMapping="true"/>
+    		<!-- 	<id property="mName" column="m_name"/>
+			</association> -->
+			
+	</resultMap>
+	<select id="selectByProfessor" resultMap="CourseMap">
+		SELECT c.co_code, co_name, co_year, co_limit, co_credit, co_day, co_time,
+				classroom, division, m.m_name, p.pro_name
+		FROM procourse pc join course c on(pc.co_code=c.co_code)
+							join major m on (m.m_no=c.m_no)
+							join professor p on (p.pro_id=pc.pro_id)
+		WHERE p.pro_id=#{proId}
+	</select> 
+</mapper>

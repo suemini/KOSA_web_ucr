@@ -13,6 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor
 @Setter @Getter
 public class Registration {
-	List<Course> courses;
-	Student stuId;
+	private List<Course> courses;
+	private Student stuId;
 }
