@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.kosa.ucr.course.SearchCourseMapper"> 
+	<resultMap type="Course" id="CourseMap" autoMapping="true">
+    <id property="coCode" column="co_code"></id>              
+    <association property="coMajorName" javaType="Major" autoMapping="true">
+    </association>
+    <association property="coProName" javaType="Professor" autoMapping="true">
+    </association>
+</resultMap>
+
+<select id="searchCourses" resultMap="CourseMap">
+    SELECT c.co_code, co_name, co_year, co_limit, co_credit, co_day, co_time, classroom, division, regi_cnt,
+		   m.m_no, m.m_name, m_uni, p.pro_name, p.pro_id, pro_pwd, pro_iden_num, pro_email, pro_phone
+    FROM course c
+    JOIN major m ON (m.m_no=c.m_no)
+    LEFT JOIN procourse pc ON (c.co_code=pc.co_code)
+    LEFT JOIN professor p ON (pc.pro_id=p.pro_id)
+    <where>
+        <if test="condition != null">
+            AND ${condition}
+        </if>
+    </where>
+</select> 
+  </mapper>

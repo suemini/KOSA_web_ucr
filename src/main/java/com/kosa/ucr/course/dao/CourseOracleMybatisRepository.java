@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -14,7 +15,7 @@ import com.kosa.ucr.course.dto.Course;
 import com.kosa.ucr.exception.FindException;
 import com.kosa.ucr.user.dto.Student;
 
-public class CourseOracleMybatisRepository implements CourseRepository {
+public class CourseOracleMybatisRepository implements CourseRepository{
 	private SqlSessionFactory sqlSessionFactory;
 
 	public CourseOracleMybatisRepository() {
@@ -28,6 +29,27 @@ public class CourseOracleMybatisRepository implements CourseRepository {
 		}
 	}
 
+	@Override
+	public List<Course> searchCourses(Map<String, String> params) throws FindException {
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			List<Course> list = session.selectList("com.kosa.ucr.course.SearchCourseMapper.searchCourses", params);
+	        if (list.isEmpty()) {
+	            throw new FindException("강좌가 없습니다");
+	        }
+//	        System.out.println(list.get(0).getCoCode() + ":" +    list.get(0).getCoMajorName());
+	        return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new FindException("강좌 검색 중 오류 발생: " + e.getMessage());
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+	
 	@Override
 	public List<Course> selectByProfessor(int proId) throws FindException {
 		SqlSession session = null;
@@ -76,3 +98,4 @@ public class CourseOracleMybatisRepository implements CourseRepository {
 		}
 	}
 }
+	

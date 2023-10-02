@@ -18,5 +18,5 @@ public class Student {
 	private String stuPhone;
 	private int stuCredits;
 	private int stuGrades;
-	private Major mName;
+	private Major coMajorName;
 }

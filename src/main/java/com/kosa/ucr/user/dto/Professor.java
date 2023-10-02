@@ -16,5 +16,5 @@ public class Professor {
 	private String proIdenNum;
 	private String proEmail;
 	private String proPhone;
-	private Major mName;
+	private Major coMajorName;
 }

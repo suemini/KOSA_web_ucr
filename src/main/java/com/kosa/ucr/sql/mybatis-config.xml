@@ -5,16 +5,15 @@
 <configuration>
   <settings>
     <setting name="mapUnderscoreToCamelCase" value="true"/>
-    <setting name="logImpl" value="STDOUT_LOGGING"/>
+  <setting name="logImpl" value="STDOUT_LOGGING"/>
   </settings>
   
   <typeAliases> <!--dto별칭주기-->
-  	<typeAlias type="com.kosa.ucr.wishlist.dto.Wishlist" alias="Wishlist"/>
+    <typeAlias type="com.kosa.ucr.wishlist.dto.Wishlist" alias="Wishlist"/>
   	<typeAlias type="com.kosa.ucr.course.dto.Course" alias="Course"/>
   	<typeAlias type="com.kosa.ucr.course.dto.Major" alias="Major"/>
-  	<typeAlias type="com.kosa.ucr.user.dto.Professor" alias="Professor"/>
-  	<typeAlias type="com.kosa.ucr.user.dto.Student" alias="Student"/>
-  	
+    <typeAlias type="com.kosa.ucr.user.dto.Professor" alias="Professor"/>
+     <typeAlias type="com.kosa.ucr.user.dto.Student" alias="Student"/>
   </typeAliases>
 
   <environments default="development">
@@ -30,6 +29,7 @@
   </environments>
 
   <mappers> <!--xml파일경로설정-->
+    <mapper resource="com/kosa/ucr/sql/SearchCourse.xml"/>
     <mapper resource="com/kosa/ucr/sql/Wishlist.xml"/>
     <mapper resource="com/kosa/ucr/sql/ProfessorCourse.xml"/>
     <mapper resource="com/kosa/ucr/sql/Student.xml"/>

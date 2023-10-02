@@ -20,7 +20,7 @@ public class Course {
 	private String coDay;
 	private String coTime;
 	private int regiCnt;
-	private Major mName;
+	private Major coMajorName;
 	//String mName; 위에 방법으로 has a관계 나타내기
-	private Professor proName;
+	private Professor coProName;
 }
