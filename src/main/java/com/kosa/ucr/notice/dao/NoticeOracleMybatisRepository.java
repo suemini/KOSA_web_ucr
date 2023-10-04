@@ -2,12 +2,20 @@ package com.kosa.ucr.notice.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class NoticeOracleMybatisRepository implements NoticeRepository {
+import com.kosa.ucr.exception.FindException;
+import com.kosa.ucr.notice.dto.Notice;
+
+public class NoticeOracleMybatisRepository {
 	private SqlSessionFactory sqlSessionFactory;
 
 	public NoticeOracleMybatisRepository() {
@@ -18,6 +26,62 @@ public class NoticeOracleMybatisRepository implements NoticeRepository {
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public List<Notice> selectAll(int startRow, int endRow) throws FindException {
+		SqlSession session = null;
+		List<Notice> list = new ArrayList<>();
+		try {
+			session = sqlSessionFactory.openSession();
+//			session.selectOne(); //return자료형이 <T>임 = selectSQL실행시 예상 실행결과가 최대 1개
+			Map<String, Integer> map = new HashMap<>();
+			map.put("start", startRow);
+			map.put("end", endRow);
+			list = session.selectList("com.kosa.ucr.Notice.NoticeMapper.selectAll", map); //return자료형이 <E>임 = 실행결과가 여러개
+			return list;
+		} catch (Exception e) {
+//			e.printStackTrace();
+			throw new FindException(e.getMessage());
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+	
+	public int selectCount() throws FindException {
+		SqlSession session = null;	
+		try {
+			session = sqlSessionFactory.openSession();
+			int count = session.selectOne("com.kosa.ucr.Notice.NoticeMapper.selectCount"); //autoUnboxing
+			return count;
+		} catch (Exception e) {
+//			e.printStackTrace();
+			throw new FindException(e.getMessage());
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+	
+	public Notice selectByProdNo(int noticeNo) throws FindException {
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession(); //Conncection
+			Notice n = session.selectOne("com.kosa.ucr.Notice.NoticeMapper.selectByNoticeNo", noticeNo);
+			if(n != null) {
+				return n;
+			} else {
+				throw new FindException("공지사항이 없습니다");
+			}			
+		} catch(Exception e){
+			throw new FindException(e.getMessage());
+		} finally {
+			if(session != null) {
+				session.close();
+			}
 		}
 	}
 }
