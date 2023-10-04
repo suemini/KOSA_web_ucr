@@ -4,25 +4,73 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosa.ucr.registration.RegistrationMapper">
 	<insert id="insertRegistration" parameterType="java.util.Map">
-		 INSERT INTO registration(co_code, stu_id)
-		 VALUES (#{coCode}, #{stuId})
+		INSERT INTO registration(co_code, stu_id)
+		VALUES (#{coCode}, #{stuId})
 	</insert>
-	
 	<delete id="deleteRegistration" parameterType="java.util.Map">
-		 DELETE FROM registration
-		 WHERE (co_code=#{coCode} and stu_id=#{stuId})
+		DELETE FROM registration
+		WHERE (co_code=#{coCode} and stu_id=#{stuId})
 	</delete>
-	<resultMap id="CourseMap" type="Course" autoMapping="true">	
-			<association property="coProName" javaType="com.kosa.ucr.user.dto.Professor" autoMapping="true"/>
-			<association property="coMajorName" javaType="com.kosa.ucr.course.dto.Major" autoMapping="true"/>
+	
+	<!-- 수강신청한 강좌 내역 -->
+	<resultMap id="CourseMap" type="Course" autoMapping="true">
+		<association property="coProName" javaType="com.kosa.ucr.user.dto.Professor" autoMapping="true" />
+		<association property="coMajorName" javaType="com.kosa.ucr.course.dto.Major" autoMapping="true" />
 	</resultMap>
 	<select id="selectByRegistration" resultMap="CourseMap">
 		SELECT c.co_code, co_name, co_year, co_limit, co_credit, co_day, co_time, classroom, division, regi_cnt,
-        		m.m_no, m.m_name, m.m_uni, p.pro_name, p.pro_id, p.pro_pwd, p.pro_iden_num, p.pro_email, p.pro_phone
+				m.m_no, m.m_name, m.m_uni, p.pro_name, p.pro_id, p.pro_pwd, p.pro_iden_num, p.pro_email, p.pro_phone
 		FROM registration r join course c on(r.co_code=c.co_code)
-             	   left join procourse pc on (pc.co_code=c.co_code)
-               			join major m on (m.m_no=c.m_no)
-              	   left join professor p on (p.pro_id=pc.pro_id)
+					   left join procourse pc on (pc.co_code=c.co_code)
+							join major m on (m.m_no=c.m_no)
+					   left join professor p on (p.pro_id=pc.pro_id)
 		WHERE r.stu_id=#{stuId}
-	</select> 
+	</select>
+	
+	<!-- 과거 수강학점 내역 조회 -->
+	<select id="selectForPastCredits" resultType="PastCredits">
+		SELECT * FROM
+		pastcredits WHERE stu_id=#{stuId}
+	</select>
+	
+	<!-- 현재 수강학점 내역 조회 -->
+	<resultMap id="PastCreditsMap" type="PastCredits" autoMapping="true">
+		<association property="pcStuId" javaType="Student" autoMapping="true" />
+	</resultMap> 
+	<select id="selectForNowCredits" resultMap="PastCreditsMap">
+		SELECT STU_ID, DIVISION, CREDIT
+		FROM (
+				SELECT r.stu_id AS STU_ID, '전공필수' AS DIVISION, SUM(COALESCE(c.co_credit, 0)) AS CREDIT
+				FROM registration r JOIN course c ON r.co_code = c.co_code
+							   LEFT JOIN procourse pc ON pc.co_code = c.co_code
+									JOIN major m ON m.m_no = c.m_no
+							   LEFT JOIN professor p ON p.pro_id = pc.pro_id
+				WHERE r.stu_id = #{stuId} AND c.division = '전공필수'
+				GROUP BY r.stu_id
+				UNION ALL
+				SELECT r.stu_id AS STU_ID, '전공선택' AS DIVISION, SUM(COALESCE(c.co_credit, 0)) AS CREDIT
+				FROM registration r JOIN course c ON r.co_code = c.co_code
+							   LEFT JOIN procourse pc ON pc.co_code = c.co_code
+									JOIN major m ON m.m_no = c.m_no
+							   LEFT JOIN professor p ON p.pro_id = pc.pro_id
+				WHERE r.stu_id = #{stuId} AND c.division = '전공선택'
+				GROUP BY r.stu_id
+				UNION ALL
+				SELECT r.stu_id AS STU_ID, '전공기초' AS DIVISION, SUM(COALESCE(c.co_credit, 0)) AS CREDIT
+				FROM registration r	JOIN course c ON r.co_code = c.co_code
+							   LEFT JOIN procourse pc ON pc.co_code = c.co_code
+									JOIN major m ON m.m_no = c.m_no
+							   LEFT JOIN professor p ON p.pro_id = pc.pro_id
+				WHERE r.stu_id = #{stuId} AND c.division = '전공기초'
+				GROUP BY r.stu_id
+				UNION ALL
+				SELECT r.stu_id AS STU_ID, '교양' AS DIVISION, SUM(COALESCE(c.co_credit, 0)) AS CREDIT
+				FROM registration r JOIN course c ON r.co_code = c.co_code
+							   LEFT JOIN procourse pc ON pc.co_code = c.co_code
+									JOIN major m ON m.m_no = c.m_no
+							   LEFT JOIN professor p ON p.pro_id = pc.pro_id
+				WHERE r.stu_id = #{stuId} AND c.division = '교양'
+				GROUP BY r.stu_id
+				) RESULT
+	</select>
 </mapper>
