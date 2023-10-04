@@ -8,6 +8,7 @@ import com.kosa.ucr.exception.FindException;
 import com.kosa.ucr.exception.RemoveException;
 import com.kosa.ucr.registration.dao.RegistrationOracleMybatisRepository;
 import com.kosa.ucr.registration.dao.RegistrationRepository;
+import com.kosa.ucr.registration.dto.PastCredits;
 
 
 public class RegistrationService {
@@ -34,5 +35,15 @@ public class RegistrationService {
 	//findByRegistraion
 	public List<Course> findByRegistration(int stuId) throws FindException{
 		return repository.selectByRegistration(stuId);
+	}
+	
+	//findForNowCredit
+	public List<PastCredits> findForNowCredit(int stuId) throws FindException{
+		return repository.selectForNowCredit(stuId);
+	}
+	
+	//findForNowCredit
+	public List<PastCredits> findForPastCredit(int stuId) throws FindException{
+		return repository.selectForPastCredit(stuId);
 	}
 }

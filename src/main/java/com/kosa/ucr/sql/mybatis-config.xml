@@ -13,6 +13,7 @@
   	<typeAlias type="com.kosa.ucr.course.dto.Major" alias="Major"/>
     <typeAlias type="com.kosa.ucr.user.dto.Professor" alias="Professor"/>
     <typeAlias type="com.kosa.ucr.user.dto.Student" alias="Student"/>
+    <typeAlias type="com.kosa.ucr.registration.dto.PastCredits" alias="PastCredits"/>
   </typeAliases>
 
   <environments default="development">

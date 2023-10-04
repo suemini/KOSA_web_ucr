@@ -15,6 +15,7 @@ import com.kosa.ucr.course.dto.Course;
 import com.kosa.ucr.exception.AddException;
 import com.kosa.ucr.exception.FindException;
 import com.kosa.ucr.exception.RemoveException;
+import com.kosa.ucr.registration.dto.PastCredits;
 
 public class RegistrationOracleMybatisRepository implements RegistrationRepository {
 	private SqlSessionFactory sqlSessionFactory;
@@ -83,11 +84,50 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 	        if (list.isEmpty()) {
 	            throw new FindException("수강강좌가 없습니다");
 	        }
-//	        System.out.println(list.get(0).getCoCode() + ":" +    list.get(0).getCoMajorName());
 	        return list;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new FindException("강좌 검색 중 오류 발생: " + e.getMessage());
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+
+	@Override
+	public List<PastCredits> selectForNowCredit(int stuId) throws FindException {
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			List<PastCredits> list = session.selectList("com.kosa.ucr.registration.RegistrationMapper.selectForNowCredits", stuId);
+	        if (list.isEmpty()) {
+	            throw new FindException("이번학기 수강학점 내역이 없습니다");
+	        }
+	        return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new FindException("이번학기 수강학점 내역 검색 중 오류 발생: " + e.getMessage());
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+
+	@Override
+	public List<PastCredits> selectForPastCredit(int stuId) throws FindException {
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			List<PastCredits> list = session.selectList("com.kosa.ucr.registration.RegistrationMapper.selectForPastCredits", stuId);
+	        if (list.isEmpty()) {
+	            throw new FindException("과거 수강학점 내역이 없습니다");
+	        }
+	        return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new FindException("과거 수강학점 내역 검색 중 오류 발생: " + e.getMessage());
 		} finally {
 			if(session != null) {
 				session.close();
