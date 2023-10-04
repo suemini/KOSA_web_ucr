@@ -6,6 +6,7 @@ import com.kosa.ucr.course.dto.Course;
 import com.kosa.ucr.exception.AddException;
 import com.kosa.ucr.exception.FindException;
 import com.kosa.ucr.exception.RemoveException;
+import com.kosa.ucr.registration.dto.PastCredits;
 
 public interface RegistrationRepository {
 	/***
@@ -31,4 +32,20 @@ public interface RegistrationRepository {
 	 * @throws FindException DB연결 실패 또는 조회실패 시 예외발생
 	 */
 	List<Course> selectByRegistration(int stuId)throws FindException;
+
+	/***
+	 * 학수번호로 학생의 이번학기 수강학점을 조회한다
+	 * @param stuId 학수번호
+	 * @return 이번학기 수강학점
+	 * @throws FindException DB연결 실패 또는 조회실패 시 예외발생
+	 */
+	List<PastCredits> selectForNowCredit(int stuId) throws FindException;
+	
+	/***
+	 * 학수번호로 학생의 과거학기 수강학점을 조회한다
+	 * @param stuId 학수번호
+	 * @return 과거학점
+	 * @throws FindException DB연결 실패 또는 조회실패 시 예외발생
+	 */
+	List<PastCredits> selectForPastCredit(int stuId) throws FindException;
 }
