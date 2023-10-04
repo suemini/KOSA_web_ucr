@@ -28,16 +28,19 @@
 	</select>
 	
 	<!-- 과거 수강학점 내역 조회 -->
-	<select id="selectForPastCredits" resultType="PastCredits">
+	<resultMap id="PastCreditsMap1" type="PastCredits" autoMapping="true">
+		<association property="pcStuId" javaType="Student" autoMapping="true" />
+	</resultMap> 
+	<select id="selectForPastCredits" resultMap="PastCreditsMap1">
 		SELECT * FROM
 		pastcredits WHERE stu_id=#{stuId}
 	</select>
 	
 	<!-- 현재 수강학점 내역 조회 -->
-	<resultMap id="PastCreditsMap" type="PastCredits" autoMapping="true">
+	<resultMap id="PastCreditsMap2" type="PastCredits" autoMapping="true">
 		<association property="pcStuId" javaType="Student" autoMapping="true" />
 	</resultMap> 
-	<select id="selectForNowCredits" resultMap="PastCreditsMap">
+	<select id="selectForNowCredits" resultMap="PastCreditsMap2">
 		SELECT STU_ID, DIVISION, CREDIT
 		FROM (
 				SELECT r.stu_id AS STU_ID, '전공필수' AS DIVISION, SUM(COALESCE(c.co_credit, 0)) AS CREDIT
