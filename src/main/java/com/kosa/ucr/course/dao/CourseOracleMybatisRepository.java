@@ -30,6 +30,29 @@ public class CourseOracleMybatisRepository implements CourseRepository{
 	}
 
 	@Override
+	public List<Course> searchAll() throws FindException {
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			
+			List<Course> list = session.selectList("com.kosa.ucr.course.SearchCourseMapper.searchAll");
+
+			if (list.isEmpty()) {
+				throw new FindException("강좌가 없습니다");
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new FindException("강좌 검색 중 오류 발생: " + e.getMessage());
+		} finally {
+			if(session != null) {
+
+				session.close();
+			}
+		}
+	}
+
+	@Override
 	public List<Course> searchCourses(Map<String, String> params) throws FindException {
 		SqlSession session = null;
 		try {
@@ -82,7 +105,7 @@ public class CourseOracleMybatisRepository implements CourseRepository{
 		try {
 			session = sqlSessionFactory.openSession();
 			List<Student> students = new ArrayList<>();
-			students = session.selectList("com.kosa.ucr.course.StudentListMapper.selectByCourse", coCode);
+			students = session.selectList("com.kosa.ucr.user.dto.StudentMapper.selectByCourse", coCode);
 			if (students != null) {
 				return students;
 			} else {
