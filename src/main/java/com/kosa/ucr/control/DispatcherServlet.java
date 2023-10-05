@@ -38,7 +38,7 @@ public class DispatcherServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 //		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.자기숫자:5500");
-		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.35:5500");
+		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.125:5500");
 		response.setHeader("Access-Control-Allow-Credentials", "true");
 		
 		System.out.println("request.getServletPath()=" + request.getServletPath());
