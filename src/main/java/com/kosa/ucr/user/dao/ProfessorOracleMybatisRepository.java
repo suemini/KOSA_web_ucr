@@ -65,8 +65,8 @@ public class ProfessorOracleMybatisRepository {
 				return "fail";
 			}
 		} catch (Exception e) {
-			String pro_id = "fail";
-			return pro_id;
+			e.printStackTrace();
+			throw new FindException(e.getMessage());
 		} finally {
 			if(session != null) {
 				session.close();
