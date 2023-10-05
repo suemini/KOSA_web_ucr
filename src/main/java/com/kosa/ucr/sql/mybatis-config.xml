@@ -14,6 +14,7 @@
     <typeAlias type="com.kosa.ucr.user.dto.Professor" alias="Professor"/>
     <typeAlias type="com.kosa.ucr.user.dto.Student" alias="Student"/>
     <typeAlias type="com.kosa.ucr.registration.dto.PastCredits" alias="PastCredits"/>
+    <typeAlias type="com.kosa.ucr.notice.dto.Notice" alias="Notice"/>
   </typeAliases>
 
   <environments default="development">
@@ -34,6 +35,9 @@
     <mapper resource="com/kosa/ucr/sql/ProfessorCourse.xml"/>
     <mapper resource="com/kosa/ucr/sql/StudentList.xml"/>
     <mapper resource="com/kosa/ucr/sql/Registration.xml"/>
+    <mapper resource="com/kosa/ucr/sql/Professor.xml"/>
+    <mapper resource="com/kosa/ucr/sql/Student.xml"/>
+    <mapper resource="com/kosa/ucr/sql/Notice.xml"/>
   </mappers>
 
 </configuration>

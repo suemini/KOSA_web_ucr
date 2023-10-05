@@ -10,6 +10,13 @@ import com.kosa.ucr.user.dto.Student;
 
 public interface CourseRepository {
 	/**
+	 * 전체 조회
+	 * @param 전체 조회는 파라미터 필요 없음.
+	 * @return 전체 조회 목록
+	 * @throws FindException DB와의 연결실패하면 예외발생한다
+	 */
+	List<Course> searchAll() throws FindException;
+	/**
 	 * 교수명으로 강의들을 검색한다
 	 * @param proName
 	 * @return 강의들

@@ -12,6 +12,14 @@
     </association>
 </resultMap>
 
+    <select id="searchAll" resultMap="CourseMap">
+        SELECT c.co_code, co_name, co_year, co_limit, co_credit, co_day, co_time, classroom, division, regi_cnt,
+        m.m_no, m.m_name, m.m_uni, p.pro_name, p.pro_id, p.pro_pwd, p.pro_iden_num, p.pro_email, p.pro_phone
+        FROM course c join major m on (m.m_no=c.m_no)
+        left join procourse pc on (c.co_code=pc.co_code)
+        left join professor p on (pc.pro_id=p.pro_id)
+    </select>
+
 <select id="searchCourses" resultMap="CourseMap">
     SELECT c.co_code, co_name, co_year, co_limit, co_credit, co_day, co_time, classroom, division, regi_cnt,
 		   m.m_no, m.m_name, m_uni, p.pro_name, p.pro_id, pro_pwd, pro_iden_num, pro_email, pro_phone
