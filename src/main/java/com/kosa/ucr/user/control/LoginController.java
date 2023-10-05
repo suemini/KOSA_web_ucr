@@ -25,7 +25,7 @@ public class LoginController extends UserController{
 		ObjectMapper mapper = new ObjectMapper();
 		//out.print("로그인성공");
 		String idString = request.getParameter("id");
-		int id = Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(idString);
 		String pwd = request.getParameter("pwd");
 
 		Map<String, Object> map = new HashMap<>();
