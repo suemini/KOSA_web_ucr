@@ -4,6 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosa.ucr.User.ProfessorMapper">
 	<select id="selectById" resultType="Professor">
-	  SELECT * FROM professor WHERE pro_id=#{anyName}
+	  SELECT * FROM professor WHERE pro_id=#{id}
+	</select>
+	<select id="selectByUserInfo" resultType="String" parameterType="java.util.Map">
+	  SELECT pro_id FROM professor WHERE pro_name=#{name} AND pro_iden_num=#{idenNum} AND pro_phone=#{phone}
+	</select>
+	<select id="selectByIdInfo" resultType="String" parameterType="java.util.Map">
+	  SELECT pro_pwd FROM professor WHERE pro_id=#{id} AND pro_name=#{name} AND pro_iden_num=#{idenNum} AND pro_phone=#{phone}
 	</select>
 </mapper>

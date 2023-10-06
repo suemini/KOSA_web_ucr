@@ -66,7 +66,7 @@ public class NoticeOracleMybatisRepository {
 		}
 	}
 	
-	public Notice selectByProdNo(int noticeNo) throws FindException {
+	public Notice selectByNoticeNo(String noticeNo) throws FindException {
 		SqlSession session = null;
 		try {
 			session = sqlSessionFactory.openSession(); //Conncection

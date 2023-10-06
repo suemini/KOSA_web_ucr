@@ -32,7 +32,6 @@ public class NoticeListController extends NoticeController{
 		}
 		try {
 			PageGroup<Notice> pg = service.findAll(cp);
-			//					out.print("{ \"나이\" : 10, \"주소\":\"서울특별시 양천구 목동\" }"); //라이브러리사용(잭슨)
 			String jsonStr = mapper.writeValueAsString(pg);
 			out.print(jsonStr);
 		} catch (FindException e) {

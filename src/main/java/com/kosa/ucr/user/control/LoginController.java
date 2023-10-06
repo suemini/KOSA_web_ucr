@@ -24,15 +24,15 @@ public class LoginController extends UserController{
 		PrintWriter out = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
 		//out.print("로그인성공");
-		String idString = request.getParameter("id");
-		int id = Integer.parseInt(idString);
+		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 
 		Map<String, Object> map = new HashMap<>();
 
 		HttpSession session = request.getSession();
 		session.removeAttribute("loginedId");
-		if(idString.length() == 8) {
+		if(id.length() == 8) {
+			
 			try {
 				service.loginStudent(id, pwd);
 				map.put("status", 2);
@@ -40,19 +40,17 @@ public class LoginController extends UserController{
 
 				session.setAttribute("loginedId", id);
 			} catch (FindException e) {
-				//					e.printStackTrace();
 				map.put("status", 0);
 				map.put("msg", "로그인 실패");
 			}
-		}else if(idString.length() == 6) {
+		}else if(id.length() == 6) {
 			try {
-				service.loginStudent(id, pwd);
+				service.loginProfessor(id, pwd);
 				map.put("status", 1);
 				map.put("msg", "교수 로그인 성공");
 
 				session.setAttribute("loginedId", id);
 			} catch (FindException e) {
-				//					e.printStackTrace();
 				map.put("status", 0);
 				map.put("msg", "로그인 실패");
 			}

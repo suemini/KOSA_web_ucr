@@ -2,6 +2,9 @@ package com.kosa.ucr.user.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -26,7 +29,7 @@ public class ProfessorOracleMybatisRepository {
 	}
 
 	
-	public Professor selectProfessorById(int id) throws FindException {
+	public Professor selectProfessorById(String id) throws FindException {
 		SqlSession session = null;
 		try{
 			session = sqlSessionFactory.openSession();
@@ -34,7 +37,32 @@ public class ProfessorOracleMybatisRepository {
 			if(p != null) {
 				return p;
 			} else {
-				throw new FindException("해당하는 아이디가 없습니다");
+				throw new FindException("해당하는 직번이 없습니다");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new FindException(e.getMessage());
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		
+	}
+	
+	public String selectProfessorByUserInfo(String name, String idenNum, String phone) throws FindException{
+		SqlSession session = null;
+		try {
+			Map<String, Object> paramMap = new HashMap<>();
+			paramMap.put("name", name);
+			paramMap.put("idenNum", idenNum);
+			paramMap.put("phone", phone);
+			session = sqlSessionFactory.openSession();
+			String proId = session.selectOne("com.kosa.ucr.User.ProfessorMapper.selectByUserInfo", paramMap);
+			if(proId != null) {
+				return proId;
+			} else {
+				return "fail";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,6 +75,30 @@ public class ProfessorOracleMybatisRepository {
 		
 	}
 
-	
+	public String selectProfessorByIdInfo(String id, String name, String idenNum, String phone) throws FindException{
+		SqlSession session = null;
+		try {
+			session =  sqlSessionFactory.openSession();
+			Map<String, Object> paramMap =  new HashMap<>();
+			paramMap.put("id", id);
+			paramMap.put("name", name);
+			paramMap.put("idenNum", idenNum);
+			paramMap.put("phone", phone);
+			String proPwd = session.selectOne("com.kosa.ucr.User.ProfessorMapper.selectByIdInfo", paramMap);
+			if (proPwd != null) {
+				return proPwd;
+			} else {
+				return "fail";
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new FindException(e.getMessage());
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
 
 }
