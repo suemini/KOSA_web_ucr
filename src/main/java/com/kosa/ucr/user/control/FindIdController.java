@@ -24,23 +24,21 @@ public class FindIdController extends UserController{
 		ObjectMapper mapper = new ObjectMapper();
 		
 		String name = request.getParameter("name");
-		String iden_num = request.getParameter("iden_num");
+		String idenNum = request.getParameter("idenNum");
 		String phone = request.getParameter("phone");
 
 		Map<String, Object> map = new HashMap<>();
 
 		
 		try {
-			String stu_id = service.findStudentId(name, iden_num, phone);
-			String pro_id = service.findProfessorId(name, iden_num, phone);
+			String stuId = service.findStudentId(name, idenNum, phone);
+			String proId = service.findProfessorId(name, idenNum, phone);
 			
-			System.out.println("1" + pro_id);
-			System.out.println("2" + stu_id);
-			if(pro_id != "fail") {
-				map.put("id", pro_id);
+			if(proId != "fail") {
+				map.put("id", proId);
 				map.put("msg", "정보와 일치하는 직번");					
-			}else if (stu_id != "fail") {
-				map.put("id", stu_id);
+			}else if (stuId != "fail") {
+				map.put("id", stuId);
 				map.put("msg", "정보와 일치하는 학번");		
 			}else {
 				map.put("msg", "정보와 일치하는 학번 또는 직번이 존재하지 않습니다");

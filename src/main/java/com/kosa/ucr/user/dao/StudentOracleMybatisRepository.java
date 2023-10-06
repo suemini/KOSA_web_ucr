@@ -53,17 +53,17 @@ public class StudentOracleMybatisRepository {
 	}
 
 
-	public String selectStudentByUserInfo(String name, String iden_num, String phone) throws FindException{
+	public String selectStudentByUserInfo(String name, String idenNum, String phone) throws FindException{
 		SqlSession session = null;
 		try {
 			Map<String, Object> paramMap = new HashMap<>();
 			paramMap.put("name", name);
-			paramMap.put("iden_num", iden_num);
+			paramMap.put("idenNum", idenNum);
 			paramMap.put("phone", phone);
 			session = sqlSessionFactory.openSession();
-			String stu_id = session.selectOne("com.kosa.ucr.User.StudentMapper.selectByUserInfo", paramMap);	
-			if(stu_id != null) {
-				return stu_id;
+			String stuId = session.selectOne("com.kosa.ucr.User.StudentMapper.selectByUserInfo", paramMap);	
+			if(stuId != null) {
+				return stuId;
 			} else {
 				return "fail";
 			}						

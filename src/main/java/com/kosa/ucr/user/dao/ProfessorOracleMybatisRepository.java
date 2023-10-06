@@ -50,17 +50,17 @@ public class ProfessorOracleMybatisRepository {
 		
 	}
 	
-	public String selectProfessorByUserInfo(String name, String iden_num, String phone) throws FindException{
+	public String selectProfessorByUserInfo(String name, String idenNum, String phone) throws FindException{
 		SqlSession session = null;
 		try {
 			Map<String, Object> paramMap = new HashMap<>();
 			paramMap.put("name", name);
-			paramMap.put("iden_num", iden_num);
+			paramMap.put("idenNum", idenNum);
 			paramMap.put("phone", phone);
 			session = sqlSessionFactory.openSession();
-			String pro_id = session.selectOne("com.kosa.ucr.User.ProfessorMapper.selectByUserInfo", paramMap);
-			if(pro_id != null) {
-				return pro_id;
+			String proId = session.selectOne("com.kosa.ucr.User.ProfessorMapper.selectByUserInfo", paramMap);
+			if(proId != null) {
+				return proId;
 			} else {
 				return "fail";
 			}

@@ -38,13 +38,4 @@ public class PageGroup<T> {
 			}			
 		}
 	}
-	
-	public static void main(String[] args) {
-		int cp = 2; //현재보려는 페이지
-		int tc = 11; //총 상품수
-		PageGroup pg = new PageGroup(null, cp, tc);
-		System.out.println(pg.getTotalPage()); //4
-		System.out.println(pg.getStartPage()); //1
-		System.out.println(pg.getEndPage());   //2
-	}
 }

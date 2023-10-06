@@ -33,12 +33,12 @@ public class UserService {
 		}
 	}
 	
-	public String findProfessorId(String name, String iden_num, String phone) throws FindException{
-		return repositoryP.selectProfessorByUserInfo(name, iden_num, phone);
+	public String findProfessorId(String name, String idenNum, String phone) throws FindException{
+		return repositoryP.selectProfessorByUserInfo(name, idenNum, phone);
 	}
 	
-	public String findStudentId(String name, String iden_num, String phone) throws FindException{
-		return repositoryS.selectStudentByUserInfo(name, iden_num, phone);
+	public String findStudentId(String name, String idenNum, String phone) throws FindException{
+		return repositoryS.selectStudentByUserInfo(name, idenNum, phone);
 	}
 	
 	

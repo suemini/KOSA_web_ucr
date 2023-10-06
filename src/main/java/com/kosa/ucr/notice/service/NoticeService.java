@@ -38,7 +38,7 @@ public class NoticeService {
 		
 	}
 	
-	public Notice findByNoticeNo(int noticeNo) throws FindException{
+	public Notice findByNoticeNo(String noticeNo) throws FindException{
 		return repository.selectByNoticeNo(noticeNo);
 	}
 }

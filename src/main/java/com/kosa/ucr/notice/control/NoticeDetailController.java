@@ -26,7 +26,7 @@ public class NoticeDetailController extends NoticeController{
 		ObjectMapper mapper = new ObjectMapper(); //잭슨 라이브러리 불러오기
 
 		//요청전달데이터 얻기
-		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		String noticeNo = request.getParameter("noticeNo");
 		try {
 			Notice p = service.findByNoticeNo(noticeNo);
 			String jsonStr = mapper.writeValueAsString(p); //라이브러리사용
