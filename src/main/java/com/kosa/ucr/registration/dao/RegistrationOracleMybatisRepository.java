@@ -134,4 +134,34 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 			}
 		}
 	}
+
+	@Override
+	public void selectRegiDupChk(String coCode, String coDay, String coTime, int stuId) throws FindException {
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			Map<String, Object> paramMap = new HashMap<>();
+	        paramMap.put("coCode", coCode);
+	        paramMap.put("coDay", coDay);
+	        paramMap.put("coTime", coTime);
+	        paramMap.put("stuId", stuId);
+			List<Map<String, String>> list = session.selectList("com.kosa.ucr.registration.RegistrationMapper.selectRegiDupChk", paramMap);
+	        if (!list.isEmpty()) {
+	        	String gubun = list.get(0).get("gubun");
+	        	if(gubun.equals("course")) {
+	        		throw new FindException("이전에 신청한 과목과 같은 과목(학수번호)입니다");
+	        	}else if(gubun.equals("time")) {
+	        		throw new FindException("이전에 신청한 과목과 시간이 겹칩니다");
+	        	}
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new FindException("강좌 검색 중 오류 발생: " + e.getMessage());
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+
 }

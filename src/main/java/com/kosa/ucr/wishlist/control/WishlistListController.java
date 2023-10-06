@@ -30,22 +30,20 @@ public class WishlistListController extends WishlistController {
 				ObjectMapper mapper = new ObjectMapper();
 				String jsonStr;
 				
-				//1. 요청전달데이터 얻기
 				Map<String, Object> map = new HashMap<>();
-				int stuId = Integer.parseInt(request.getParameter("stuId"));
-				
-				//2. HttpSession객체얻기
+				// 1. 요청전달데이터 얻기(로그인된 학번이용, 클릭하면 학수번호(coCode)받아서와서 추가할 것
+				// 2. HttpSession객체얻기
 				HttpSession session = request.getSession();
-//				String loginedId = (String) session.getAttribute("loginedId");
-				
-				// DB에 저장된 데이터 가져오기
-				/*if (loginedId == null) {
+				Integer loginedId = (Integer) session.getAttribute("loginedId");
+				String coCode = request.getParameter("coCode");
+
+				if(loginedId == null) {
 					map.put("status", 0);
-					map.put("msg", "로그인을 먼저 하세요");
-				} else {*/
+					map.put("msg", "희망강좌 리스트를 조회하려면 먼저 로그인을 해야합니다");
+				}else {
 					try {
 						List<Course> courses = new ArrayList<>(); 
-						courses = service.findByWishlist(stuId);
+						courses = service.findByWishlist(loginedId);
 						map.put("status", 1);
 						map.put("courses", courses);
 					} catch (FindException e) {
@@ -53,7 +51,7 @@ public class WishlistListController extends WishlistController {
 						map.put("status", 0);
 						map.put("msg", e.getMessage());
 					}
-//				}
+				}
 				out.print(mapper.writeValueAsString(map));
 		return null;
 	}
