@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosa.ucr.exception.FindException;
 
-public class FindIdController extends UserController {
+public class FindPwdController extends UserController {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
@@ -22,34 +22,34 @@ public class FindIdController extends UserController {
 		//응답출력스트림얻기
 		PrintWriter out = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
-		
+				
+		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String idenNum = request.getParameter("idenNum");
-		String phone = request.getParameter("phone");
-
+		String phone = request.getParameter("phone");		
+		
 		Map<String, Object> map = new HashMap<>();
 		
 		try {
-			String stuId = service.findStudentId(name, idenNum, phone);
-			String proId = service.findProfessorId(name, idenNum, phone);
+			String stuPwd = service.findStudentPwd(id, name, idenNum, phone);
+			String proPwd = service.findProfessorPwd(id, name, idenNum, phone);
 			
-			if(proId != "fail") {
-				map.put("id", proId);
-				map.put("msg", "정보와 일치하는 직번");					
-			}else if (stuId != "fail") {
-				map.put("id", stuId);
-				map.put("msg", "정보와 일치하는 학번");		
+			if(proPwd != "fail") {
+				map.put("id", proPwd);
+				map.put("msg", "정보와 일치하는 비밀번호");					
+			}else if (stuPwd != "fail") {
+				map.put("id", stuPwd);
+				map.put("msg", "정보와 일치하는 비밀번호");		
 			}else {
-				map.put("msg", "정보와 일치하는 학번 또는 직번이 존재하지 않습니다");
+				map.put("msg", "정보와 일치하는 비밀번호가 존재하지 않습니다");
 			}
 		} catch (FindException e) {
-			map.put("msg", "학번,직번찾기 실패");
-		}		
+			map.put("msg", "비밀번호찾기 실패");
+		}
 		
 		String jsonStr = mapper.writeValueAsString(map);
 		out.print(jsonStr);
 		return null;
-		
 	}
 
 }

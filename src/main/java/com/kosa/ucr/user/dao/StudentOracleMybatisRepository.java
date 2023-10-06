@@ -76,6 +76,32 @@ public class StudentOracleMybatisRepository {
 			}
 		}
 	}
+	
+	public String selectStudentByIdInfo(String id, String name, String idenNum, String phone) throws FindException{
+		SqlSession session = null;
+		try {
+			session =  sqlSessionFactory.openSession();
+			Map<String, Object> paramMap =  new HashMap<>();
+			paramMap.put("id", id);
+			paramMap.put("name", name);
+			paramMap.put("idenNum", idenNum);
+			paramMap.put("phone", phone);
+			String stuPwd = session.selectOne("com.kosa.ucr.User.StudentMapper.selectByIdInfo", paramMap);
+			if (stuPwd != null) {
+				return stuPwd;
+			} else { 
+				return "fail";
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new FindException(e.getMessage());
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
 
 	
 

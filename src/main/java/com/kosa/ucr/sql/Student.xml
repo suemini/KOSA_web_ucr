@@ -9,4 +9,7 @@
 	<select id="selectByUserInfo" resultType="String" parameterType="java.util.Map">
 	  SELECT stu_id FROM student WHERE stu_name=#{name} AND stu_iden_num=#{idenNum} AND stu_phone=#{phone}
 	</select>
+	<select id="selectByIdInfo" resultType="String" parameterType="java.util.Map">
+	  SELECT stu_pwd FROM student WHERE stu_id=#{id} AND stu_name=#{name} AND stu_iden_num=#{idenNum} AND stu_phone=#{phone}
+	</select>
 </mapper>

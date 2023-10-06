@@ -41,6 +41,14 @@ public class UserService {
 		return repositoryS.selectStudentByUserInfo(name, idenNum, phone);
 	}
 	
+	public String findProfessorPwd(String id, String name, String idenNum, String phone) throws FindException{
+		return repositoryP.selectProfessorByIdInfo(id, name, idenNum, phone);
+	}
+	
+	public String findStudentPwd(String id, String name, String idenNum, String phone) throws FindException{
+		return repositoryS.selectStudentByIdInfo(id, name, idenNum, phone);
+	}
+	
 	
 
 }
