@@ -22,12 +22,25 @@ public class RegistrationService {
 		return service;
 	}
 	
-	//addWishlist
-	public void addRegistration(String coCode, int stuId) throws AddException {
-		repository.insertRegistration(coCode, stuId);
+	//addRegistration
+	public void addRegistration(String coCode,String coDay, String coTime, int stuId) throws AddException {
+		try {
+			findRegiDupChk(coCode, coDay, coTime, stuId);
+			repository.insertRegistration(coCode, stuId);
+		} catch (FindException e) {
+			e.printStackTrace();
+			throw new AddException(e.getMessage());
+		}
+		
 	}
 	
-	//removeWishlist
+	//findRegiByCoCode
+	public void findRegiDupChk(String coCode, String coDay, String coTime, int stuId) throws FindException{
+		repository.selectRegiDupChk(coCode, coDay, coTime, stuId);
+	}
+	
+	
+	//removeRegistration
 	public void removeRegistration(String coCode, int stuId) throws RemoveException{
 		repository.deleteRegistration(coCode, stuId);
 	}

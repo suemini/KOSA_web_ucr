@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -33,15 +32,17 @@ public class AddRegistrationController extends RegistrationController {
 		// 1. 요청전달데이터 얻기(로그인된 학번이용, 클릭하면 학수번호(coCode)받아서와서 추가할 것
 		// 2. HttpSession객체얻기
 		HttpSession session = request.getSession();
-		Integer loginedId = (Integer) session.getAttribute("loginedId");
 		String coCode = request.getParameter("coCode");
+		String coDay = request.getParameter("coDay");
+		String coTime = request.getParameter("coTime");
+		Integer loginedId = (Integer) session.getAttribute("loginedId");
 
 		if (loginedId == null) {
 			map.put("status", 0);
 			map.put("msg", "수강신청을 하기 전에 로그인을 해주세요");
 		} else {
 			try {
-				service.addRegistration(coCode, loginedId);
+				service.addRegistration(coCode, coDay, coTime, loginedId);
 				map.put("status", 1);
 				map.put("msg", "수강신청 성공");
 			} catch (AddException e) {

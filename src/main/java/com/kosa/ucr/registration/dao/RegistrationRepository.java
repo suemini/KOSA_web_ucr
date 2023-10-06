@@ -26,7 +26,7 @@ public interface RegistrationRepository {
 	void deleteRegistration(String coCode, int stuId) throws RemoveException;
 	
 	/***
-	 * 학수번호로 수강신청 목록을 조회한다
+	 * 학번으로 수강신청 목록을 조회한다
 	 * @param stuId 학수번호
 	 * @return 수강신청 목록
 	 * @throws FindException DB연결 실패 또는 조회실패 시 예외발생
@@ -34,7 +34,7 @@ public interface RegistrationRepository {
 	List<Course> selectByRegistration(int stuId)throws FindException;
 
 	/***
-	 * 학수번호로 학생의 이번학기 수강학점을 조회한다
+	 * 학번으로 학생의 이번학기 수강학점을 조회한다
 	 * @param stuId 학수번호
 	 * @return 이번학기 수강학점
 	 * @throws FindException DB연결 실패 또는 조회실패 시 예외발생
@@ -42,10 +42,18 @@ public interface RegistrationRepository {
 	List<PastCredits> selectForNowCredit(int stuId) throws FindException;
 	
 	/***
-	 * 학수번호로 학생의 과거학기 수강학점을 조회한다
+	 * 학번으로 학생의 과거학기 수강학점을 조회한다
 	 * @param stuId 학수번호
 	 * @return 과거학점
 	 * @throws FindException DB연결 실패 또는 조회실패 시 예외발생
 	 */
 	List<PastCredits> selectForPastCredit(int stuId) throws FindException;
+	
+	/***
+	 * 학번, 학수번호로 같은 과목을 신청한 게 있는지 조회한다 
+	 * @param stuId 학번
+	 * @param coCode 학수번호
+	 * @throws FindException DB연결 실패 또는 조회실패 시 예외발생
+	 */
+	void selectRegiDupChk(String coCode, String coDay, String coTime, int stuId) throws FindException;
 }

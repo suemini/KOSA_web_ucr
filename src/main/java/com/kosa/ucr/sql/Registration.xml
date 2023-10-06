@@ -7,6 +7,7 @@
 		INSERT INTO registration(co_code, stu_id)
 		VALUES (#{coCode}, #{stuId})
 	</insert>
+	
 	<delete id="deleteRegistration" parameterType="java.util.Map">
 		DELETE FROM registration
 		WHERE (co_code=#{coCode} and stu_id=#{stuId})
@@ -75,5 +76,20 @@
 				WHERE r.stu_id = #{stuId} AND c.division = '교양'
 				GROUP BY r.stu_id
 				) RESULT
+	</select>
+	
+	<!-- 수강신청한 강좌 내역 중 조건처리용 -->
+	<!-- .xml에서는 부등호 그냥 사용 불가 = &lt;(<) &gt;(>)   -->
+	<select id="selectRegiDupChk" resultType="java.util.Map">
+		SELECT 'course' "gubun", c.co_code, co_day, co_time
+		FROM registration r join course c on(r.co_code=c.co_code)
+		WHERE (r.stu_id=#{stuId} and (INSTR(c.co_code, SUBSTR(#{coCode}, 1, LENGTH(#{coCode})-3)) &gt; 0))
+		union
+		SELECT 'time' "gubun", c.co_code, co_day, co_time
+		FROM registration r join course c on(r.co_code=c.co_code)
+		WHERE (r.stu_id=#{stuId} and (INSTR(c.co_code, SUBSTR(#{coCode}, 1, LENGTH(#{coCode})-3)) &gt; 0)) or --과목조건
+      		  (r.stu_id=#{stuId} and ((INSTR(co_day, SUBSTR(#{coDay}, 1, 1)) &gt; 0) or (INSTR(co_day, SUBSTR(#{coDay}, 1, LENGTH(#{coDay}))) &gt; 0)) and --시간조건
+      		  ( ((SUBSTR(co_time, 7, 2) &lt; SUBSTR(#{coTime}, 1, 2)) or ((SUBSTR(co_time, 7, 2) &lt;= SUBSTR(#{coTime}, 1, 2)) and (SUBSTR(co_time, 10, 2) &lt;= SUBSTR(#{coTime}, 4, 2)))) or
+      		  ((SUBSTR(co_time, 7, 2) &gt; SUBSTR(#{coTime}, 1, 2)) or ((SUBSTR(co_time, 7, 2) &gt;= SUBSTR(#{coTime}, 1, 2)) and (SUBSTR(co_time, 10, 2) &gt;= SUBSTR(#{coTime}, 4, 2))))) )
 	</select>
 </mapper>
