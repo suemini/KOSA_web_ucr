@@ -33,7 +33,7 @@ public class RemoveRegistrationController extends RegistrationController {
 		// 1. 요청전달데이터 얻기(로그인된 학번이용, 클릭하면 학수번호(coCode)받아서와서 추가할 것
 		// 2. HttpSession객체얻기
 		HttpSession session = request.getSession();
-		Integer loginedId = (Integer) session.getAttribute("loginedId");
+		String loginedId = (String) session.getAttribute("loginedId");
 		String coCode = request.getParameter("coCode");
 
 		if (loginedId == null) {
@@ -42,7 +42,8 @@ public class RemoveRegistrationController extends RegistrationController {
 		} else { // 대체함
 
 			try {
-				service.removeRegistration(coCode, loginedId);
+				Integer id = Integer.parseInt(loginedId);
+				service.removeRegistration(coCode, id);
 				map.put("status", 1);
 				map.put("msg", "수강취소 성공");
 			} catch (RemoveException e) {

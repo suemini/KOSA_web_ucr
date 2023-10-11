@@ -32,21 +32,21 @@ public class CountCreditsController extends RegistrationController {
 				
 				//1. 요청전달데이터 얻기
 				Map<String, Object> map = new HashMap<>();
-				int stuId = Integer.parseInt(request.getParameter("stuId"));
 				
 				//2. HttpSession객체얻기
 				HttpSession session = request.getSession();
-//				String loginedId = (String) session.getAttribute("loginedId");
+				String loginedId = (String) session.getAttribute("loginedId");
 				
 				// DB에 저장된 데이터 가져오기
-				/*if (loginedId == null) {
+				if (loginedId == null) {
 					map.put("status", 0);
 					map.put("msg", "로그인을 먼저 하세요");
-				} else {*/
+				} else {
 					try {
+						Integer id = Integer.parseInt(loginedId);
 						List<PastCredits> pastCredits = new ArrayList<>();
 						List<PastCredits> nowCredits = new ArrayList<>();
-						pastCredits = service.findForPastCredit(stuId);
+						pastCredits = service.findForPastCredit(id);
 //						nowCredits = service.findForNowCredit(stuId);
 						System.out.println("pastCredits : "+pastCredits.get(0).getPcStuId());
 //						System.out.println("nowCredits: "+nowCredits.get(0).getPcStuId());
@@ -58,7 +58,7 @@ public class CountCreditsController extends RegistrationController {
 						map.put("status", 0);
 						map.put("msg", e.getMessage());
 					}
-//				}
+				}
 				out.print(mapper.writeValueAsString(map));
 				return null;
 	}
