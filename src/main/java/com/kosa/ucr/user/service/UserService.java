@@ -20,6 +20,7 @@ public class UserService {
 	}
 
 	public void loginProfessor(String id, String pwd) throws FindException{
+		System.out.println("service");
 		Professor p = repositoryP.selectProfessorById(id);	
 		if(!p.getProPwd().equals(pwd)) {
 			throw new FindException();

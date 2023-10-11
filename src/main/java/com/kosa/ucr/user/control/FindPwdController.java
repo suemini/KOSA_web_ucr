@@ -22,25 +22,36 @@ public class FindPwdController extends UserController {
 		//응답출력스트림얻기
 		PrintWriter out = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
-				
+			
+		Map<String, Object> map = new HashMap<>();
+		
 		String id = request.getParameter("id");
+		try {
+			int idNum = Integer.parseInt(id);
+		}catch(NumberFormatException e) {
+			map.put("status", 0);
+			map.put("msg", "아이디를 정확히 입력하세요");
+			out.print(mapper.writeValueAsString(map));
+			return null;
+		}
 		String name = request.getParameter("name");
 		String idenNum = request.getParameter("idenNum");
 		String phone = request.getParameter("phone");		
-		
-		Map<String, Object> map = new HashMap<>();
-		
+				
 		try {
 			String stuPwd = service.findStudentPwd(id, name, idenNum, phone);
 			String proPwd = service.findProfessorPwd(id, name, idenNum, phone);
 			
 			if(proPwd != "fail") {
-				map.put("id", proPwd);
+				map.put("status", 1);
+				map.put("pwd", proPwd);
 				map.put("msg", "정보와 일치하는 비밀번호");					
 			}else if (stuPwd != "fail") {
-				map.put("id", stuPwd);
+				map.put("status", 2);
+				map.put("pwd", stuPwd);
 				map.put("msg", "정보와 일치하는 비밀번호");		
 			}else {
+				map.put("status", 0);
 				map.put("msg", "정보와 일치하는 비밀번호가 존재하지 않습니다");
 			}
 		} catch (FindException e) {
