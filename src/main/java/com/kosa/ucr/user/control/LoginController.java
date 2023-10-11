@@ -23,16 +23,31 @@ public class LoginController extends UserController{
 		response.setContentType("application/json;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
-		//out.print("로그인성공");
-		String id = request.getParameter("id");
-		String pwd = request.getParameter("pwd");
 
 		Map<String, Object> map = new HashMap<>();
+		String id = request.getParameter("id");
+		
+		if(id.length() != 6 && id.length()!=8) {
+			map.put("status", 0);
+			map.put("msg", "아이디를 정확히 입력하세요");
+			out.print(mapper.writeValueAsString(map));
+			return null;
+		}
+		
+		try {
+			int idNum = Integer.parseInt(id);
+		}catch(NumberFormatException e) {
+			map.put("status", 0);
+			map.put("msg", "아이디를 정확히 입력하세요");
+			out.print(mapper.writeValueAsString(map));
+			return null;
+		}
+		
+		String pwd = request.getParameter("pwd");
 
 		HttpSession session = request.getSession();
 		session.removeAttribute("loginedId");
 		if(id.length() == 8) {
-			
 			try {
 				service.loginStudent(id, pwd);
 				map.put("status", 2);
