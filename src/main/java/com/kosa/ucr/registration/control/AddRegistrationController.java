@@ -35,14 +35,15 @@ public class AddRegistrationController extends RegistrationController {
 		String coCode = request.getParameter("coCode");
 		String coDay = request.getParameter("coDay");
 		String coTime = request.getParameter("coTime");
-		Integer loginedId = (Integer) session.getAttribute("loginedId");
+		String loginedId = (String) session.getAttribute("loginedId");
 
 		if (loginedId == null) {
 			map.put("status", 0);
 			map.put("msg", "수강신청을 하기 전에 로그인을 해주세요");
 		} else {
 			try {
-				service.addRegistration(coCode, coDay, coTime, loginedId);
+				Integer id = Integer.parseInt(loginedId);
+				service.addRegistration(coCode, coDay, coTime, id);
 				map.put("status", 1);
 				map.put("msg", "수강신청 성공");
 			} catch (AddException e) {
