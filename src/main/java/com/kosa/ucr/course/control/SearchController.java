@@ -28,30 +28,34 @@ public class SearchController extends CourseController{
 		String coDay = request.getParameter("coDay");
 		String condition = "";
 
-		if (proName != null) {
+		if (coDay.equals("All") && (mName.equals("All") || mName.equals("")) && proName.equals("") && coName.equals("") ) {
+		    condition = "c.co_code IS NOT NULL";
+		} else if (proName != null && proName !="") {
 		    condition = "INSTR(pro_name, '" + proName + "') > 0";
-		} else if (mName != null) {
+		} else if (mName != null && !mName.equals("All") && !mName.equals("")) {
 		    condition = "m_name = '" + mName + "'";
-		} else if (coName != null) {
+		} else if (coName != null && coName !="") {
 		    condition = "INSTR(co_name, '" + coName + "') > 0";
-		} else if (coDay != null) {
+		} else if (coDay != null && coDay !="") {
 		    condition = "INSTR(co_day, '" + coDay + "') > 0";
 		} 
-		
+
+		Map<String, Object> map = new HashMap<>();
 		try {
 		    Map<String, String> params = new HashMap<>();
 		    params.put("condition", condition);
-		    List<Course> list = service.searchCourses(params);
-		    String jsonStr = mapper.writeValueAsString(list);
-		    out.print(jsonStr);			
+		    List<Course> list = service.searchCourses(params);	    
+		    map.put("status", 1);
+		    map.put("list", list);
+		    
 		} catch (Exception e) {
 			e.printStackTrace();
-			Map<String, String> map = new HashMap<>();
+			map.put("status", 0);
 			map.put("msg", e.getMessage());
-			String jsonStr = mapper.writeValueAsString(map);
-			out.print(jsonStr);
-			
+				
 		}
+		String jsonStr = mapper.writeValueAsString(map);
+		out.print(jsonStr);
 		return null;
 	}
 }

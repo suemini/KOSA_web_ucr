@@ -47,11 +47,11 @@ public class CountCreditsController extends RegistrationController {
 						List<PastCredits> pastCredits = new ArrayList<>();
 						List<PastCredits> nowCredits = new ArrayList<>();
 						pastCredits = service.findForPastCredit(stuId);
-						nowCredits = service.findForNowCredit(stuId);
+//						nowCredits = service.findForNowCredit(stuId);
 						System.out.println("pastCredits : "+pastCredits.get(0).getPcStuId());
-						System.out.println("nowCredits: "+nowCredits.get(0).getPcStuId());
+//						System.out.println("nowCredits: "+nowCredits.get(0).getPcStuId());
 						map.put("status", 1);
-						map.put("nowCredits", nowCredits);
+//						map.put("nowCredits", nowCredits);
 						map.put("pastCredits", pastCredits);
 					} catch (FindException e) {
 						e.printStackTrace();
