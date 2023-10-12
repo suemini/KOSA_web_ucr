@@ -2,14 +2,16 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kosa.ucr.course.StudentListMapper">
+<mapper namespace="com.kosa.ucr.Course.StudentListMapper">
 	<resultMap id="StudentMap" type="Student" autoMapping="true">
+		<!-- 기존 것 맵핑 -->
 		<id property="stuId" column="stu_id"/>
+			<!-- major엔티티와 1:1 관계 맵핑 -->
 			<association property="coMajorName" javaType="com.kosa.ucr.course.dto.Major" autoMapping="true"/>
-			
+
 	</resultMap>
 	<select id="selectByCourse" resultMap="StudentMap">
-		SELECT s.stu_id, stu_pwd, stu_name, stu_iden_num, stu_email, stu_phone, stu_grades, m.m_name, m.m_no, m.m_uni
+		SELECT s.stu_id, stu_name, stu_email, stu_phone, stu_grades, m.m_name as coMajorName
 		FROM registration r join course c on(r.co_code=c.co_code)
     	    	       		join student s on (r.stu_id=s.stu_id)
         	    		    join procourse pc on (pc.co_code=c.co_code)
