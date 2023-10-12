@@ -9,8 +9,8 @@ import lombok.ToString;
 @ToString
 
 public class PageGroup<T> {
-	public static final int CNT_PER_PAGE = 3;
-	public static final int CNT_PER_PAGEGROUP = 2;
+	public static final int CNT_PER_PAGE = 5;
+	public static final int CNT_PER_PAGEGROUP = 5;
 	private List<T> list; //List가 <>를 T로 바꿔서 재사용 가능하게 함
 	private int totalCnt; //총상품수 11
 	private int totalPage; //총페이지수 4
