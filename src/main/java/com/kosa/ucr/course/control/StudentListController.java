@@ -33,16 +33,16 @@ public class StudentListController extends CourseController {
 				//1. 요청전달데이터 얻기
 				Map<String, Object> map = new HashMap<>();
 				String coCode = request.getParameter("coCode");
-				
+								
 				//2. HttpSession객체얻기
 				HttpSession session = request.getSession();
-//				String loginedId = (String) session.getAttribute("loginedId");
+				String loginedId = (String) session.getAttribute("loginedId");
 				
 				// DB에 저장된 데이터 가져오기
-				/*if (loginedId == null) {
+				if (loginedId == null) {
 					map.put("status", 0);
 					map.put("msg", "로그인을 먼저 하세요");
-				} else {*/
+				} else {
 					try {
 						List<Student> students = new ArrayList<>(); 
 						students = service.searchByCourse(coCode);
@@ -53,7 +53,7 @@ public class StudentListController extends CourseController {
 						map.put("status", 0);
 						map.put("msg", e.getMessage());
 					}
-//				}
+				}
 				out.print(mapper.writeValueAsString(map));
 		return null;
 	}

@@ -11,4 +11,6 @@ public class Notice {
 	private int noticeNo;
 	private String title;
 	private String contents;
+	private String viewCount;
+	private String writeDate;
 }

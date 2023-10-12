@@ -34,7 +34,7 @@ public class RegistrationListController extends RegistrationController {
 		// 1. 요청전달데이터 얻기(로그인된 학번이용, 클릭하면 학수번호(coCode)받아서와서 추가할 것
 		// 2. HttpSession객체얻기
 		HttpSession session = request.getSession();
-		Integer loginedId = (Integer) session.getAttribute("loginedId");
+		String loginedId = (String) session.getAttribute("loginedId");
 		String coCode = request.getParameter("coCode");
 
 		if (loginedId == null) {
@@ -42,8 +42,9 @@ public class RegistrationListController extends RegistrationController {
 			map.put("msg", "수강신청 강좌를 조회하려면 먼저 로그인을 해주세요");
 		} else {
 			try {
+				Integer id = Integer.parseInt(loginedId);
 				List<Course> courses = new ArrayList<>();
-				courses = service.findByRegistration(loginedId);
+				courses = service.findByRegistration(id);
 				map.put("status", 1);
 				map.put("courses", courses);
 			} catch (FindException e) {
