@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosa.ucr.Notice.NoticeMapper">
 	<select id="selectByNoticeNo" resultType="Notice">
-	  SELECT * FROM notice WHERE notice_no=#{anyName}
+	  SELECT * FROM notice WHERE notice_no=#{noticeNO}
 	</select>
 	<select id="selectAll" resultType="Notice" parameterType="java.util.HashMap"><!--여러개 전달이라 맵타입-->
      SELECT * 
