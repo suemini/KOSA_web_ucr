@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -33,18 +32,18 @@ public class ProfessorCourseController extends CourseController {
 		
 		//1. 요청전달데이터 얻기
 		Map<String, Object> map = new HashMap<>();
-		int proId = Integer.parseInt(request.getParameter("proId"));
 		
 		//2. HttpSession객체얻기
 		HttpSession session = request.getSession();
-//		String loginedId = (String) session.getAttribute("loginedId");
+		String loginedId = (String) session.getAttribute("loginedId");
 		
 		// DB에 저장된 데이터 가져오기
-		/*if (loginedId == null) {
+		if (loginedId == null) {
 			map.put("status", 0);
 			map.put("msg", "로그인을 먼저 하세요");
-		} else {*/
+		} else {
 			try {
+				int proId = Integer.parseInt(loginedId);
 				List<Course> courses = new ArrayList<>(); 
 				courses = service.searchByProfessor(proId);
 				map.put("status", 1);
@@ -54,7 +53,7 @@ public class ProfessorCourseController extends CourseController {
 				map.put("status", 0);
 				map.put("msg", e.getMessage());
 			}
-//		}
+		}
 		out.print(mapper.writeValueAsString(map));
 		return null;
 	}

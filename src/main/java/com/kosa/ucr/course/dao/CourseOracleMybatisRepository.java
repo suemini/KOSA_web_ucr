@@ -3,6 +3,7 @@ package com.kosa.ucr.course.dao;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -105,8 +106,8 @@ public class CourseOracleMybatisRepository implements CourseRepository{
 		try {
 			session = sqlSessionFactory.openSession();
 			List<Student> students = new ArrayList<>();
-			students = session.selectList("com.kosa.ucr.user.dto.StudentMapper.selectByCourse", coCode);
-			if (students != null) {
+			students = session.selectList("com.kosa.ucr.Course.StudentListMapper.selectByCourse", coCode);
+			if (students.size() != 0) {
 				return students;
 			} else {
 				throw new FindException("학생이 없습니다");

@@ -14,8 +14,8 @@
 	</delete>
 	
 	<resultMap id="CourseMap" type="Course" autoMapping="true">	
-			<association property="coProName" javaType="com.kosa.ucr.user.dto.Professor" autoMapping="true"/>
-			<association property="coMajorName" javaType="com.kosa.ucr.course.dto.Major" autoMapping="true"/>
+		<association property="coProName" javaType="com.kosa.ucr.user.dto.Professor" autoMapping="true"/>
+		<association property="coMajorName" javaType="com.kosa.ucr.course.dto.Major" autoMapping="true"/>
 	</resultMap>
 	<select id="selectByWishlist" resultMap="CourseMap">
 		SELECT c.co_code, co_name, co_year, co_limit, co_credit, co_day, co_time, classroom, division, regi_cnt,
