@@ -24,7 +24,7 @@ public class NoticeService {
 			currentPage = 1;
 		}
 		
-		int cntPerPage = 5; //한 페이지당 보여줄 목록 수
+		int cntPerPage = 7; //한 페이지당 보여줄 목록 수
 		//currentPage      //1  2  3  4
 		int startRow = (currentPage - 1) * cntPerPage + 1;  //1  6  11  16
 		int endRow = currentPage*cntPerPage;        //5  10  15  20
