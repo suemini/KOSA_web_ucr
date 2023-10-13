@@ -50,10 +50,6 @@ public class RegistrationService {
 		return repository.selectByRegistration(stuId);
 	}
 	
-	//findForNowCredit
-	public List<PastCredits> findForNowCredit(int stuId) throws FindException{
-		return repository.selectForNowCredit(stuId);
-	}
 	
 	//findForNowCredit
 	public List<PastCredits> findForPastCredit(int stuId) throws FindException{

@@ -26,7 +26,7 @@ public class CourseOracleMybatisRepository implements CourseRepository{
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	}
 
@@ -43,8 +43,7 @@ public class CourseOracleMybatisRepository implements CourseRepository{
 			}
 			return list;
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new FindException("강좌 검색 중 오류 발생: " + e.getMessage());
+			throw new FindException("강좌가 없습니다" );
 		} finally {
 			if(session != null) {
 
@@ -66,7 +65,7 @@ public class CourseOracleMybatisRepository implements CourseRepository{
 	        return list;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new FindException("강좌 검색 중 오류 발생: " + e.getMessage());
+			throw new FindException("해당되는 강좌가 없습니다");
 		} finally {
 			if(session != null) {
 				session.close();
@@ -91,8 +90,8 @@ public class CourseOracleMybatisRepository implements CourseRepository{
 				throw new FindException("강좌가 없습니다");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new FindException(e.getMessage());
+//			e.printStackTrace();
+			throw new FindException("강좌가 없습니다");
 		} finally {
 			if (session != null) {
 				session.close();
@@ -113,8 +112,8 @@ public class CourseOracleMybatisRepository implements CourseRepository{
 				throw new FindException("학생이 없습니다");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new FindException(e.getMessage());
+//			e.printStackTrace();
+			throw new FindException("학생이 없습니다");
 		} finally {
 			if (session != null) {
 				session.close();
