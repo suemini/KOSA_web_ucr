@@ -13,7 +13,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/KOSA202307/SW/LIB/lombok-1.18.28.jar">
+	<classpathentry kind="lib" path="D:/SW/eclipse/lombok.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
