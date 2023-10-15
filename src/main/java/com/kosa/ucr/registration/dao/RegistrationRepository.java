@@ -69,4 +69,6 @@ public interface RegistrationRepository {
 	 * @throws RemoveException DB연결 실패 또는 제거실패 시 예외발생
 	 */
 	void decreaseRegiCnt(String coCode) throws RemoveException;
+	
+	Course selectByRegiCnt(String coCode) throws FindException;
 }

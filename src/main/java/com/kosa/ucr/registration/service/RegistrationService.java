@@ -26,6 +26,7 @@ public class RegistrationService {
 	public void addRegistration(String coCode,String coDay, String coTime, int stuId) throws AddException {
 		try {
 			findRegiDupChk(coCode, coDay, coTime, stuId);
+			findByRegiCnt(coCode);
 			repository.insertRegistration(coCode, stuId);
 			upRegiCnt(coCode);
 		} catch (Exception e) {
@@ -33,6 +34,10 @@ public class RegistrationService {
 			throw new AddException(e.getMessage());
 		}
 		
+	}
+	
+	public Course findByRegiCnt(String coCode) throws FindException{
+		return repository.selectByRegiCnt(coCode);
 	}
 	
 	//findRegiByCoCode

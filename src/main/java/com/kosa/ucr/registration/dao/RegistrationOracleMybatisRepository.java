@@ -152,7 +152,9 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 		try {
 			session = sqlSessionFactory.openSession();
 			session.update("com.kosa.ucr.registration.RegistrationMapper.increaseRegiCnt", coCode);
+			session.commit();
 		} catch (Exception e) {
+			session.rollback();
 //			e.printStackTrace();
 			throw new AddException(e.getMessage());
 		} finally {
@@ -179,5 +181,23 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 	         }
 	      }      
 	   }
+
+	@Override
+	public Course selectByRegiCnt(String coCode) throws FindException {
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			Course list = session.selectOne("com.kosa.ucr.registration.RegistrationMapper.selectByRegiCnt", coCode);
+	        if (list.getCoLimit() <= list.getRegiCnt() ) {
+	        	throw new FindException(": 정원이 마감되었습니다");	            
+	        }else {
+	        	return list;	        	
+	        }
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
 
 }
