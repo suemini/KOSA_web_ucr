@@ -11,18 +11,19 @@
 	<update id="increaseRegiCnt" parameterType="String">
 		update course
 		set regi_cnt = regi_cnt + 1
-		where co_code=(select co_code
-					   from course
-					   where (co_limit > regi_cnt) and co_code=#{coCode})
+		where co_code=#{coCode}
 	</update>
 	<!--regi_cnt 감소-->
 	<update id="decreaseRegiCnt" parameterType="String">
       UPDATE COURSE
       SET regi_cnt = regi_cnt - 1
-      where co_code=(select co_code
-					 from course
-					 where (co_limit > regi_cnt) and co_code=#{coCode})
-   </update>
+      where co_code=#{coCode}
+    </update>
+    <select id="selectByRegiCnt" resultType="Course">
+		select co_limit, regi_cnt
+ 		from course
+ 		where co_code=#{coCode}
+    </select>
 	
 	<delete id="deleteRegistration" parameterType="java.util.Map">
 		DELETE FROM registration
