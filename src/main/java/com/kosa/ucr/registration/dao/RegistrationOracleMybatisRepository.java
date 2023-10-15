@@ -154,7 +154,7 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 			session.update("com.kosa.ucr.registration.RegistrationMapper.increaseRegiCnt", coCode);
 		} catch (Exception e) {
 //			e.printStackTrace();
-			throw new AddException("수강인원 증가 불가능");
+			throw new AddException(e.getMessage());
 		} finally {
 			if(session != null) {
 				session.close();

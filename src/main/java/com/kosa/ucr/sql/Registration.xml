@@ -13,7 +13,7 @@
 		set regi_cnt = regi_cnt + 1
 		where co_code=(select co_code
 					   from course
-					   where co_limit = regi_cnt and co_code=#{coCode})
+					   where (co_limit > regi_cnt) and co_code=#{coCode})
 	</update>
 	<!--regi_cnt 감소-->
 	<update id="decreaseRegiCnt" parameterType="String">
@@ -21,7 +21,7 @@
       SET regi_cnt = regi_cnt - 1
       where co_code=(select co_code
 					 from course
-					 where co_limit = regi_cnt and co_code=#{coCode})
+					 where (co_limit > regi_cnt) and co_code=#{coCode})
    </update>
 	
 	<delete id="deleteRegistration" parameterType="java.util.Map">
