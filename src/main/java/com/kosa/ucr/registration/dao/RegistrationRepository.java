@@ -59,7 +59,7 @@ public interface RegistrationRepository {
 	/***
 	 * 수강신청시 해당하는 학수번호의 regiCnt(수강신청인원)을 1 올려준다
 	 * @param coCode 학수번호
-	 * @throws AddException DB연결 실패 또는 업데이트 실패 시 예외발생
+	 * @throws AddException DB여결 실패 또는 업데이트 실패 시 예외발생
 	 */
 	void increaseRegiCnt(String coCode) throws AddException;
 
@@ -70,11 +70,5 @@ public interface RegistrationRepository {
 	 */
 	void decreaseRegiCnt(String coCode) throws RemoveException;
 	
-	/**
-	 * 수강신청시 신청하려는 정원이 가능한지 확인한다
-	 * @param coCode
-	 * @return 가능하면 1이 나오고, 불가능하면 0이 나온다
-	 * @throws AddException DB연결 실패 또는 업데이트 실패 시 예외발생
-	 */
-	int selectByRegiCnt (String coCode) throws FindException;
+	Course selectByRegiCnt(String coCode) throws FindException;
 }
