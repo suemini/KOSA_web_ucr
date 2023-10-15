@@ -13,7 +13,7 @@ import com.kosa.ucr.registration.dto.PastCredits;
 
 public class RegistrationService {
 	private RegistrationRepository repository;
-	//wishlistService singleton으로 맞춰줌
+	//RegistrationService singleton으로 맞춰줌
 	private static RegistrationService service = new RegistrationService();
 	private RegistrationService() {
 		repository = new RegistrationOracleMybatisRepository();
@@ -27,7 +27,8 @@ public class RegistrationService {
 		try {
 			findRegiDupChk(coCode, coDay, coTime, stuId);
 			repository.insertRegistration(coCode, stuId);
-		} catch (FindException e) {
+			upRegiCnt(coCode);
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AddException(e.getMessage());
 		}
@@ -42,7 +43,13 @@ public class RegistrationService {
 	
 	//removeRegistration
 	public void removeRegistration(String coCode, int stuId) throws RemoveException{
-		repository.deleteRegistration(coCode, stuId);
+		try {
+			repository.deleteRegistration(coCode, stuId);
+			downRegiCnt(coCode);
+		} catch (RemoveException e) {
+			e.printStackTrace();
+			throw new RemoveException(e.getMessage());
+		}
 	}
 	
 	//findByRegistraion
@@ -55,4 +62,12 @@ public class RegistrationService {
 	public List<PastCredits> findForPastCredit(int stuId) throws FindException{
 		return repository.selectForPastCredit(stuId);
 	}
+	
+	//regiCnt 증가/감소
+	public void upRegiCnt(String coCode) throws AddException{
+		repository.increaseRegiCnt(coCode);
+	}
+	public void downRegiCnt(String coCode) throws RemoveException {
+	      repository.decreaseRegiCnt(coCode);
+	   }
 }

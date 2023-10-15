@@ -146,4 +146,38 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 		}
 	}
 
+	@Override
+	public void increaseRegiCnt(String coCode) throws AddException {
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			session.update("com.kosa.ucr.registration.RegistrationMapper.increaseRegiCnt", coCode);
+		} catch (Exception e) {
+//			e.printStackTrace();
+			throw new AddException("수강인원 증가 불가능");
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+	
+	   @Override
+	   public void decreaseRegiCnt(String coCode) throws RemoveException {
+	      SqlSession session = null;
+	      try {
+	         session = sqlSessionFactory.openSession();
+	         session.update("com.kosa.ucr.registration.RegistrationMapper.decreaseRegiCnt", coCode);
+	         session.commit();
+	      } catch (Exception e) {
+	         session.rollback();
+//	         e.printStackTrace();
+	         throw new RemoveException(e.getMessage());
+	      } finally {
+	         if(session != null) {
+	            session.close();            
+	         }
+	      }      
+	   }
+
 }
