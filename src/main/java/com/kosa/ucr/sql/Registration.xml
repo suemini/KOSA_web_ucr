@@ -4,66 +4,105 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosa.ucr.registration.RegistrationMapper">
 	<insert id="insertRegistration" parameterType="java.util.Map">
-		INSERT INTO registration(co_code, stu_id)
+		INSERT INTO
+		registration(co_code, stu_id)
 		VALUES (#{coCode}, #{stuId})
 	</insert>
-	<!--regi_cnt 증가-->
+	<!--regi_cnt 증가 -->
 	<update id="increaseRegiCnt" parameterType="String">
-		update course
-		set regi_cnt = regi_cnt + 1
+		UPDATE COURSE
+		SET
+		regi_cnt = regi_cnt + 1
 		where co_code=(select co_code
-					   from course
-					   where (co_limit > regi_cnt) and co_code=#{coCode})
+		from course
+		where
+		(co_limit > regi_cnt) and co_code=#{coCode})
 	</update>
-	<!--regi_cnt 감소-->
+
+	<!--regi_cnt 갯수 -->
+	<select id="selectByRegiCnt" resultType="int">
+		SELECT count(*)
+		FROM course
+		WHERE (co_limit > regi_cnt) and co_code=#{coCode}
+	</select>
+
+	<!--regi_cnt 감소 -->
 	<update id="decreaseRegiCnt" parameterType="String">
-      UPDATE COURSE
-      SET regi_cnt = regi_cnt - 1
-      where co_code=(select co_code
-					 from course
-					 where (co_limit > regi_cnt) and co_code=#{coCode})
-   </update>
-	
+		UPDATE COURSE
+		SET
+		regi_cnt = regi_cnt - 1
+		where co_code=(select co_code
+		from course
+		where
+		(co_limit > regi_cnt) and co_code=#{coCode})
+	</update>
+
 	<delete id="deleteRegistration" parameterType="java.util.Map">
-		DELETE FROM registration
+		DELETE FROM
+		registration
 		WHERE (co_code=#{coCode} and stu_id=#{stuId})
 	</delete>
-	
+
 	<!-- 수강신청한 강좌 내역 -->
 	<resultMap id="CourseMap" type="Course" autoMapping="true">
-		<association property="coProName" javaType="com.kosa.ucr.user.dto.Professor" autoMapping="true" />
-		<association property="coMajorName" javaType="com.kosa.ucr.course.dto.Major" autoMapping="true" />
+		<association property="coProName"
+			javaType="com.kosa.ucr.user.dto.Professor" autoMapping="true" />
+		<association property="coMajorName"
+			javaType="com.kosa.ucr.course.dto.Major" autoMapping="true" />
 	</resultMap>
 	<select id="selectByRegistration" resultMap="CourseMap">
-		SELECT c.co_code, co_name, co_year, co_limit, co_credit, co_day, co_time, classroom, division, regi_cnt,
-				m.m_no, m.m_name, m.m_uni, p.pro_name, p.pro_id, p.pro_pwd, p.pro_iden_num, p.pro_email, p.pro_phone
-		FROM registration r join course c on(r.co_code=c.co_code)
-					   left join procourse pc on (pc.co_code=c.co_code)
-							join major m on (m.m_no=c.m_no)
-					   left join professor p on (p.pro_id=pc.pro_id)
+		SELECT c.co_code,
+		co_name, co_year, co_limit, co_credit, co_day, co_time, classroom,
+		division, regi_cnt,
+		m.m_no, m.m_name, m.m_uni, p.pro_name, p.pro_id,
+		p.pro_pwd, p.pro_iden_num,
+		p.pro_email, p.pro_phone
+		FROM registration r
+		join course c
+		on(r.co_code=c.co_code)
+		left join procourse pc on
+		(pc.co_code=c.co_code)
+		join major m on (m.m_no=c.m_no)
+		left join
+		professor p on (p.pro_id=pc.pro_id)
 		WHERE r.stu_id=#{stuId}
 	</select>
-	
+
 	<!-- 과거 수강학점 내역 조회 -->
-	<resultMap id="PastCreditsMap1" type="PastCredits" autoMapping="true">
-		<association property="pcStuId" javaType="Student" autoMapping="true" />
-	</resultMap> 
+	<resultMap id="PastCreditsMap1" type="PastCredits"
+		autoMapping="true">
+		<association property="pcStuId" javaType="Student"
+			autoMapping="true" />
+	</resultMap>
 	<select id="selectForPastCredits" resultMap="PastCreditsMap1">
 		SELECT * FROM
 		pastcredits WHERE stu_id=#{stuId}
 	</select>
-	
+
 	<!-- 수강신청한 강좌 내역 중 조건처리용 -->
-	<!-- .xml에서는 부등호 그냥 사용 불가 = &lt;(<) &gt;(>)   -->
+	<!-- .xml에서는 부등호 그냥 사용 불가 = &lt;(<) &gt;(>) -->
 	<select id="selectRegiDupChk" resultType="java.util.Map">
-		SELECT 'course' "gubun", c.co_code, co_day, co_time
-		FROM registration r join course c on(r.co_code=c.co_code)
-		WHERE (r.stu_id=#{stuId} and (INSTR(c.co_code, SUBSTR(#{coCode}, 1, LENGTH(#{coCode})-3)) &gt; 0))
+		SELECT 'course'
+		"gubun", c.co_code, co_day, co_time
+		FROM registration r join course c
+		on(r.co_code=c.co_code)
+		WHERE (r.stu_id=#{stuId} and (INSTR(c.co_code,
+		SUBSTR(#{coCode}, 1, LENGTH(#{coCode})-3)) &gt; 0))
 		union
-		SELECT 'time' "gubun", c.co_code, co_day, co_time
-		FROM registration r join course c on(r.co_code=c.co_code)
-		WHERE (r.stu_id=20230001 and ((INSTR(co_day, SUBSTR(#{coDay}, 1, 1)) > 0) or (INSTR(co_day, SUBSTR(#{coDay}, LENGTH(#{coDay}))) > 0)))
-and (( instr(substr(co_time, 7, 2), substr(#{coTime}, 7, 2)) > 0 or instr(substr(co_time, 7, 2), substr(#{coTime}, 1, 2)) > 0 ) 
-or ( instr( substr(co_time, 1, 2), substr(#{coTime}, 7, 2)) > 0 or instr(substr(co_time, 1, 2), substr(#{coTime}, 1, 2)) > 0 ))
+		SELECT 'time'
+		"gubun", c.co_code, co_day, co_time
+		FROM registration r join course c
+		on(r.co_code=c.co_code)
+		WHERE (r.stu_id=20230001 and ((INSTR(co_day,
+		SUBSTR(#{coDay}, 1, 1)) > 0) or (INSTR(co_day, SUBSTR(#{coDay},
+		LENGTH(#{coDay}))) > 0)))
+		and (( instr(substr(co_time, 7, 2),
+		substr(#{coTime}, 7, 2)) > 0 or
+		instr(substr(co_time, 7, 2),
+		substr(#{coTime}, 1, 2)) > 0 )
+		or ( instr( substr(co_time, 1, 2),
+		substr(#{coTime}, 7, 2)) > 0 or
+		instr(substr(co_time, 1, 2),
+		substr(#{coTime}, 1, 2)) > 0 ))
 	</select>
 </mapper>
