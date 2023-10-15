@@ -26,7 +26,7 @@ public class WishlistOracleMybatisRepository implements WishlistRepository {
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	}
 
@@ -42,8 +42,8 @@ public class WishlistOracleMybatisRepository implements WishlistRepository {
 			session.commit();
 		} catch (Exception e) {
 			session.rollback();
-			e.printStackTrace();
-			throw new AddException(e.getMessage());
+//			e.printStackTrace();
+			throw new AddException(": 희망강좌 신청이 불가능합니다");
 		} finally {
 			if(session != null) {
 				session.close();				
@@ -63,8 +63,8 @@ public class WishlistOracleMybatisRepository implements WishlistRepository {
 			session.commit();
 		} catch (Exception e) {
 			session.rollback();
-			e.printStackTrace();
-			throw new RemoveException(e.getMessage());
+//			e.printStackTrace();
+			throw new RemoveException(": 희망강좌 취소가 불가능합니다");
 		} finally {
 			if(session != null) {
 				session.close();				
@@ -84,8 +84,8 @@ public class WishlistOracleMybatisRepository implements WishlistRepository {
 //	        System.out.println(list.get(0).getCoCode() + ":" +    list.get(0).getCoMajorName());
 	        return list;
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new FindException("강좌 검색 중 오류 발생: " + e.getMessage());
+//			e.printStackTrace();
+			throw new FindException("희망강좌가 없습니다");
 		} finally {
 			if(session != null) {
 				session.close();

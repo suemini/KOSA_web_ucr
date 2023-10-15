@@ -27,7 +27,7 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	}
 
@@ -43,8 +43,8 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 			session.commit();
 		} catch (Exception e) {
 			session.rollback();
-			e.printStackTrace();
-			throw new AddException(e.getMessage());
+//			e.printStackTrace();
+			throw new AddException(": 수강신청이 불가능합니다");
 		} finally {
 			if(session != null) {
 				session.close();				
@@ -66,7 +66,7 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 		} catch (Exception e) {
 			session.rollback();
 			e.printStackTrace();
-			throw new RemoveException(e.getMessage());
+			throw new RemoveException(": 수강취소가 불가능합니다");
 		} finally {
 			if(session != null) {
 				session.close();				
@@ -86,8 +86,9 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 	        }
 	        return list;
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new FindException("강좌 검색 중 오류 발생: " + e.getMessage());
+//			e.printStackTrace();
+			throw new FindException("수강강좌가 없습니다");
+//			return null;
 		} finally {
 			if(session != null) {
 				session.close();
@@ -95,25 +96,6 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 		}
 	}
 
-	@Override
-	public List<PastCredits> selectForNowCredit(int stuId) throws FindException {
-		SqlSession session = null;
-		try {
-			session = sqlSessionFactory.openSession();
-			List<PastCredits> list = session.selectList("com.kosa.ucr.registration.RegistrationMapper.selectForNowCredits", stuId);
-	        if (list.isEmpty()) {
-	            throw new FindException("이번학기 수강학점 내역이 없습니다");
-	        }
-	        return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new FindException("이번학기 수강학점 내역 검색 중 오류 발생: " + e.getMessage());
-		} finally {
-			if(session != null) {
-				session.close();
-			}
-		}
-	}
 
 	@Override
 	public List<PastCredits> selectForPastCredit(int stuId) throws FindException {
@@ -126,8 +108,8 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 	        }
 	        return list;
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new FindException("과거 수강학점 내역 검색 중 오류 발생: " + e.getMessage());
+//			e.printStackTrace();
+			throw new FindException("과거 수강학점 내역이 없습니다");
 		} finally {
 			if(session != null) {
 				session.close();
@@ -149,19 +131,53 @@ public class RegistrationOracleMybatisRepository implements RegistrationReposito
 	        if (!list.isEmpty()) {
 	        	String gubun = list.get(0).get("gubun");
 	        	if(gubun.equals("course")) {
-	        		throw new FindException("이전에 신청한 과목과 같은 과목(학수번호)입니다");
+	        		throw new FindException(": 이전에 신청한 과목과 같은 과목(학수번호)입니다");
 	        	}else if(gubun.equals("time")) {
-	        		throw new FindException("이전에 신청한 과목과 시간이 겹칩니다");
+	        		throw new FindException(": 이전에 신청한 과목과 시간이 겹칩니다");
 	        	}
 	        }
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new FindException("강좌 검색 중 오류 발생: " + e.getMessage());
+//			e.printStackTrace();
+			throw new FindException(e.getMessage());
 		} finally {
 			if(session != null) {
 				session.close();
 			}
 		}
 	}
+
+	@Override
+	public void increaseRegiCnt(String coCode) throws AddException {
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			session.update("com.kosa.ucr.registration.RegistrationMapper.increaseRegiCnt", coCode);
+		} catch (Exception e) {
+//			e.printStackTrace();
+			throw new AddException("수강인원 증가 불가능");
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+	
+	   @Override
+	   public void decreaseRegiCnt(String coCode) throws RemoveException {
+	      SqlSession session = null;
+	      try {
+	         session = sqlSessionFactory.openSession();
+	         session.update("com.kosa.ucr.registration.RegistrationMapper.decreaseRegiCnt", coCode);
+	         session.commit();
+	      } catch (Exception e) {
+	         session.rollback();
+//	         e.printStackTrace();
+	         throw new RemoveException(e.getMessage());
+	      } finally {
+	         if(session != null) {
+	            session.close();            
+	         }
+	      }      
+	   }
 
 }

@@ -24,7 +24,7 @@ public class ProfessorOracleMybatisRepository {
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	}
 
@@ -40,8 +40,8 @@ public class ProfessorOracleMybatisRepository {
 				throw new FindException("해당하는 직번이 없습니다");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new FindException(e.getMessage());
+//			e.printStackTrace();
+			throw new FindException("해당하는 직번이 없습니다");
 		} finally {
 			if(session != null) {
 				session.close();
@@ -65,8 +65,8 @@ public class ProfessorOracleMybatisRepository {
 				return "fail";
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new FindException(e.getMessage());
+//			e.printStackTrace();
+			throw new FindException("해당되는 직번이 없습니다");
 		} finally {
 			if(session != null) {
 				session.close();
@@ -92,8 +92,8 @@ public class ProfessorOracleMybatisRepository {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new FindException(e.getMessage());
+//			e.printStackTrace();
+			throw new FindException("해당되는 비밀번호가 없습니다");
 		} finally {
 			if(session != null) {
 				session.close();

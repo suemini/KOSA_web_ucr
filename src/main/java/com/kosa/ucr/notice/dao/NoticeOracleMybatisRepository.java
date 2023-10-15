@@ -25,7 +25,7 @@ public class NoticeOracleMybatisRepository {
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	}
 	
@@ -42,7 +42,7 @@ public class NoticeOracleMybatisRepository {
 			return list;
 		} catch (Exception e) {
 //			e.printStackTrace();
-			throw new FindException(e.getMessage());
+			throw new FindException("공지사항이 없습니다");
 		} finally {
 			if(session != null) {
 				session.close();
@@ -58,7 +58,7 @@ public class NoticeOracleMybatisRepository {
 			return count;
 		} catch (Exception e) {
 //			e.printStackTrace();
-			throw new FindException(e.getMessage());
+			throw new FindException("공지사항 조회 오류 발생! 관리자에게 문의하세요");
 		} finally {
 			if(session != null) {
 				session.close();
@@ -74,7 +74,7 @@ public class NoticeOracleMybatisRepository {
 			if(n != null) {
 				return n;
 			} else {
-				throw new FindException("공지사항이 없습니다");
+				throw new FindException("공지사항 조회 오류 발생! 관리자에게 문의하세요");
 			}			
 		} catch(Exception e){
 			throw new FindException(e.getMessage());
