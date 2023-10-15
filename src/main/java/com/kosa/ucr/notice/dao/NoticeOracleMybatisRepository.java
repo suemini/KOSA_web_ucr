@@ -71,7 +71,6 @@ public class NoticeOracleMybatisRepository {
 		try {
 			session = sqlSessionFactory.openSession(); //Conncection
 			Notice n = session.selectOne("com.kosa.ucr.Notice.NoticeMapper.selectByNoticeNo", noticeNo);
-			session.insert("com.kosa.ucr.Notice.NoticeMapper.callIncreaseViewCount", noticeNo);
 			if(n != null) {
 				return n;
 			} else {

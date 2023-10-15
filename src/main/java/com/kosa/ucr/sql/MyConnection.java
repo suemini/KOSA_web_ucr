@@ -22,7 +22,7 @@ public class MyConnection {
 		//JDBC드라이버로드
 		Class.forName("oracle.jdbc.OracleDriver");	
 		//DB연결
-		String url = "jdbc:oracle:thin:@localhost:1521:xe"; //test전 본인 ip주소로 바꾸기
+		String url = "jdbc:oracle:thin:@192.168.1.14:1521:xe"; //test전 본인 ip주소로 바꾸기
 		String user = "ucr";
 		String password = "ucr";
 		return DriverManager.getConnection(url, user, password);
