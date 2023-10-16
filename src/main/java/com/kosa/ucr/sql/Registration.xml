@@ -63,8 +63,8 @@
 		union
 		SELECT 'time' "gubun", c.co_code, co_day, co_time
 		FROM registration r join course c on(r.co_code=c.co_code)
-		WHERE (r.stu_id=20230001 and ((INSTR(co_day, SUBSTR(#{coDay}, 1, 1)) > 0) or (INSTR(co_day, SUBSTR(#{coDay}, LENGTH(#{coDay}))) > 0)))
-and (( instr(substr(co_time, 7, 2), substr(#{coTime}, 7, 2)) > 0 or instr(substr(co_time, 7, 2), substr(#{coTime}, 1, 2)) > 0 ) 
-or ( instr( substr(co_time, 1, 2), substr(#{coTime}, 7, 2)) > 0 or instr(substr(co_time, 1, 2), substr(#{coTime}, 1, 2)) > 0 ))
+		WHERE (r.stu_id=#{stuId} and ((INSTR(co_day, SUBSTR(#{coDay}, 1, 1)) &gt; 0) or (INSTR(co_day, SUBSTR(#{coDay}, LENGTH(#{coDay}))) &gt; 0)))
+and (( instr(substr(co_time, 7, 2), substr(#{coTime}, 7, 2)) &gt; 0 or instr(substr(co_time, 7, 2), substr(#{coTime}, 1, 2)) &gt; 0 ) 
+or ( instr( substr(co_time, 1, 2), substr(#{coTime}, 7, 2)) &gt; 0 or instr(substr(co_time, 1, 2), substr(#{coTime}, 1, 2)) &gt; 0 ))
 	</select>
 </mapper>
