@@ -1,0 +1,258 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400|Lora");
+body {
+  background : rgb(207, 222,230);
+}
+
+/* div box styling */
+.container {
+  margin: auto;
+  width: 650px;
+  height: 550px;
+  position: relative;
+}
+
+.welcome {
+  background: #f6f6f6;
+  width: 650px;
+  height: 415px;
+  position: absolute;
+  top: 25%;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.bluebox {
+  position: absolute;
+  top: -10%;
+  left: 5%;
+  background:   rgb(14, 88, 129);
+  width: 320px;
+  height: 530px;
+  border-radius: 5px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease-in-out;
+  z-index: 2;
+}
+
+.nodisplay {
+  display: none;
+  transition: all 0.5s ease;
+}
+
+.leftbox, .rightbox {
+  position: absolute;
+  width: 50%;
+  transition: 1s all ease;
+}
+
+.leftbox {
+  left: -2%;
+}
+
+.rightbox {
+  right: -2%;
+}
+
+/* font & button styling */
+h1 {
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+  margin-top: 95px;
+  text-transform: uppercase;
+  color: #f6f6f6;
+  font-size: 2em;
+  letter-spacing: 8px;
+}
+
+.title {
+  font-family: "Lora", serif;
+  color: #8E9AAF;
+  font-size: 1.5em;
+  line-height: 1.1em;
+  letter-spacing: 3px;
+  text-align: center;
+  font-weight: 300;
+  margin-top: 20%;
+}
+
+.desc {
+  margin-top: -8px;
+}
+
+.account {
+  margin-top: 45%;
+  font-size: 10px;
+}
+
+p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.7em;
+  letter-spacing: 2px;
+  color: #8E9AAF;
+  text-align: center;
+}
+
+span2 {
+    color: rgb(14, 88, 129);
+    font-weight: 600;
+}
+
+.logo {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    top: 40%;
+    left: 29%;
+    opacity: 0.7;
+}
+  
+.left {
+    top: 45%;
+    left: 32%;
+    opacity: 0.9;
+}
+
+button {
+  padding: 12px;
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-weight: 1000;
+  border-radius: 10px;
+  margin: auto;
+  outline: none;
+  display: block;
+}
+
+button:hover {
+  background: rgb(207, 222,230);
+  color: #f6f6f6;
+  font-weight: 1000;
+  text-shadow: -1px 0px rgb(14, 88, 129), 0px 1px rgb(14, 88, 129), 1px 1px rgb(14, 88, 129), 0px -1px rgb(14, 88, 129);
+  transition: background-color 0.7s ease-out;
+}
+
+.button {
+  margin-top: 3%;
+  background: #f6f6f6;
+  color: rgb(14, 88, 129);
+  border: solid 1px rgb(14, 88, 129);
+}
+
+.foundedInfo{
+  background: rgb(207, 222,230);
+  border: solid 1px #f6f6f6;
+  color: rgb(14, 88, 129);
+  width: 250px;
+  height: 40px;
+  position: absolute;
+  top: 88%;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 40px;
+}
+
+.submit {
+    margin-top: 25px;
+    padding: 12px;
+}
+
+.submit:hover {
+    background: rgb(207, 222,230);
+}
+
+/* form styling */
+form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 7px;
+}
+
+.more-padding {
+  padding-top: 35px;
+}
+.more-padding input {
+  padding: 12px;
+}
+.more-padding .submit {
+  margin-top: 45px;
+}
+
+input {
+  background: rgb(14, 88, 129);
+  width: 65%;
+  color: rgb(207, 222,230);
+  font-size: 1em;
+  border: none;
+  border-bottom: 1px solid rgb(207, 222,230);
+  padding: 9px;
+  margin: 7px;
+}
+input::placeholder {
+  color: rgb(207, 222,230);
+  letter-spacing: 2px;
+  font-size: 1em;
+  font-weight: 100;
+}
+input:focus {
+  color: rgb(207, 222,230);
+  outline: none;
+  border-bottom: 1.2px solid rgb(207, 222,230);
+  font-size: 1.3em;
+  transition: 0.8s all ease;
+}
+input:focus::placeholder {
+  opacity: 0;
+}
+
+label {
+  font-family: "Open Sans", sans-serif;
+  color: #ababab;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+}
+
+.checkbox {
+  display: inline;
+  white-space: nowrap;
+  position: relative;
+  left: -62px;
+  top: 5px;
+}
+
+input[type=checkbox] {
+  width: 12px;
+  background: rgb(207, 222,230);
+}
+
+.checkbox input[type=checkbox]:checked + label {
+  color: rgb(207, 222,230);
+  transition: 0.5s all ease;
+}
+
+footer{
+    position: fixed;
+    bottom : 0px;
+    left : 0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    background-color : rgb(207, 222,230);
+    color: gray; 
+    align-items: center;
+    justify-content: space-between; /* 내용을 좌우로 분산 정렬 */
+}
+footer>p {
+    margin-left: 10px;
+    color: gray;
+}
+
+#now {
+    margin-left: auto; /* 현재 시간을 오른쪽으로 이동 */
+}
+
+#nowTimes {
+    margin-right: 10px; /* 오른쪽 여백 추가 */
+}

@@ -1,0 +1,114 @@
+ul, li {
+    list-style: none;
+}
+
+section a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.noticeWrap {
+    width: 1440px;
+    margin: auto;
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+    overflow: hidden; /* 넘치는 부분 숨김 */
+}
+
+.noticeTitle {
+    display: flex;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+.noticeTitle span {
+    padding: 10px 20px; /* 선택적으로 패딩 추가 */
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    color: black;
+}
+.noticeTitle span:hover{
+    background-color: rgb(207, 222,230);
+    color: white;
+}
+
+.noticeBox > div.top {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #999;
+    background-color: rgb(207, 222,230);
+}
+
+.noticeBox > div.top > div {
+    display: inline-block;
+    padding: 5px 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+.noticeBox > div.top .num {
+    width: 10%;
+}
+
+.noticeBox > div.top .title {
+    width: 68.5%;
+}
+
+.noticeBox > div.top .date {
+    width: 10%;
+}
+
+.noticeBox > div.top .count {
+    width: 10%;
+}
+
+.noticeBox > div.functionWrap > div{
+    border-bottom: 1px solid #ddd;
+}
+
+.noticeBox > div.functionWrap > div:last-child {
+    border-bottom: 1px solid #000;
+}
+
+.noticeBox > div.functionWrap > div.noticeList > div{
+    display: inline-block;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.noticeBox > div.functionWrap .num {
+    width: 10%;
+}
+
+.noticeBox > div.functionWrap .title {
+    width: 68.5%;
+}
+
+.noticeBox > div.functionWrap .date {
+    width: 10%;
+}
+
+.noticeBox > div.functionWrap .count {
+    width: 10%;
+}
+
+.listPaging {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.listPaging button {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    line-height: 100%;
+    font-size: 1rem;
+}
+
+
+.listPaging .on {
+    border-color: rgb(14, 88, 129);
+    background: rgb(207, 222,230);
+    color: rgb(14, 88, 129);
+}
+
+
+

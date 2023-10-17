@@ -1,0 +1,98 @@
+@font-face {
+    font-family: 'NEXONLv1GothicRegular';
+    src: url('../fonts/NEXONLv1GothicRegular.ttf') format('truetype');
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'NEXONLv1GothicRegular';
+    margin: 0px;
+}
+
+header{
+    position: fixed;
+    top : 0px;
+    width: 100%;
+    height: 70px;
+    display: flex;
+}
+
+header>img {
+    height: 70px;
+    left: 0;
+    display: block;
+}
+
+header>a {
+    font-weight: 600;
+    margin: 10px;
+    font-size: 50px;
+    vertical-align: top;
+    color : rgb(14, 88, 129);
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+    overflow: hidden; /* 넘치는 부분 숨김 */
+}
+
+nav {
+    /* position: fixed; */
+    position: relative;
+    top : 80px;
+    left : 0;
+    height: 50px;
+    width: 100%;
+    line-height: 50px;
+    background-color : rgb(14, 88, 129);
+    padding-left: 30px;
+    display: flex;
+}
+
+nav>a {
+    width: 8%;
+    text-decoration: none; 
+    font-size: 110%;
+    color: white;
+}
+
+nav>a.logout {
+    position: absolute;
+    right:30px;
+    width:initial;
+}
+
+#nav>a:hover{
+    color : black;
+    font-weight: bold;
+}
+
+footer{
+    position: fixed;
+    bottom : 0px;
+    left : 0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    background-color : rgb(14, 88, 129);
+    color: white;
+    align-items: center;
+    justify-content: space-between; /* 내용을 좌우로 분산 정렬 */ 
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+    overflow: hidden; /* 넘치는 부분 숨김 */
+}
+footer>p {
+    margin-left: 10px;
+}
+
+#now {
+    margin-left: auto; /* 현재 시간을 오른쪽으로 이동 */
+}
+
+#nowTimes {
+    margin-right: 10px; /* 오른쪽 여백 추가 */
+}
+
+#mainSection {
+    width: 100%;
+    top: 140px;
+    bottom: 50px;
+    position: absolute;
+}

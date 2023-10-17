@@ -1,0 +1,27 @@
+/* div class = indexTap */
+@font-face {
+    font-family: 'NEXONLv1GothicRegular';
+    src: url('../fonts/NEXONLv1GothicRegular.ttf') format('truetype');
+}
+div.indexTap {
+    display: flex;
+    position: absolute;
+    top: 15px;
+    display: flex;
+    font-family: 'NEXONLv1GothicRegular';
+    left: 34%;
+    transform: translateX(-34%); 
+}
+div.indexTap > span {
+    padding: 10px 20px; /* 선택적으로 패딩 추가 */
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+    overflow: hidden; /* 넘치는 부분 숨김 */
+}
+div.indexTap > span:hover {
+    background-color: rgb(207, 222,230);
+    color:white;
+}
+

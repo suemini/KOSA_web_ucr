@@ -1,0 +1,110 @@
+/* div class = indexTap */
+@font-face {
+    font-family: 'NEXONLv1GothicRegular';
+    src: url('../fonts/NEXONLv1GothicRegular.ttf') format('truetype');
+}
+div.indexTap {
+    display: flex;
+    position: absolute;
+    top: 15px;
+    left: 190px; /* 가로 중앙 정렬 */
+    /* transform: translateX(-50%); 가로 가운데 정렬 */
+    display: flex;
+    font-family: 'NEXONLv1GothicRegular';
+}
+div.indexTap > span {
+    padding: 10px 20px; /* 선택적으로 패딩 추가 */
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+    overflow: hidden; /* 넘치는 부분 숨김 */
+}
+.indexTap > span:active {
+    background-color: rgb(207, 222,230);
+    color: white;
+}
+
+
+.searchCourse th:nth-child(1) { left: 46px; top: 225px; }
+.searchCourse th:nth-child(2) { left: 358px; top: 225px; }
+.searchCourse th:nth-child(3) { left: 619px; top: 225px; }
+.searchCourse th:nth-child(4) { left: 1235px; top: 225px; }
+.searchCourse th:nth-child(5) { left: 715px; top: 225px; }
+.searchCourse th:nth-child(6) { left: 818px; top: 225px; }
+.searchCourse th:nth-child(7) { left: 910px; top: 225px; }
+.searchCourse th:nth-child(8) { left: 973px; top: 225px; }
+.searchCourse th:nth-child(9) { left: 1036px; top: 225px; }
+
+div.searchCourse {
+    position:absolute;
+    display: flex;
+    top: 60px;
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%); 
+}
+.searchCourse thead {
+    text-align: center;
+    padding: 5px 0;
+    background-color: rgb(207, 222,230);
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+    overflow: hidden; /* 넘치는 부분 숨김 */
+}
+
+.searchCourse tbody {
+    text-align: center;
+    padding: 5px 0;
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+    overflow: hidden; /* 넘치는 부분 숨김 */
+}
+
+.searchCourse table.courseList {
+    border-collapse: collapse; /* Important for borders */
+    width: 100%;
+}
+
+.searchCourse table.courseList tr:first-child {
+    border-top: 1px solid #000;
+}
+
+.searchCourse table.courseList tr:last-child {
+    border-bottom: 1px solid #000;
+}
+.searchCourse table.courseList tr:hover{
+    background-color: rgb(207, 222,230);
+}
+
+.searchCourse table.courseList th {
+    border: none; /* Remove borders from header cells */
+    padding: 5px;
+}
+
+.searchCourse table.courseList td {
+    border: none; /* Remove borders from data cells */
+    padding: 5px;
+}
+
+.searchCourse table.courseList th:nth-child(2),
+.searchCourse table.courseList td:nth-child(2) {
+    width: 300px; /* Adjust the width as needed */
+    text-align: left; /* Align text to the left */
+}
+
+.searchCourse table.courseList th:nth-child(2),
+.searchCourse table.courseList td:nth-child(2) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center; /* Align text to the center if needed */
+}
+
+.searchCourse .add,
+.searchCourse .remove {
+    background-color: #444;
+    border-color: #444;
+    color: #fff;
+    font-size: 13px;
+    padding: 5px 10px;
+    cursor: pointer;
+}

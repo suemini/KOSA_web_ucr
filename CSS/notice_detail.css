@@ -1,0 +1,87 @@
+section a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.noticeWrap {
+    width: 80%;
+    margin: auto;
+
+}
+
+.noticeTitle {
+    display: flex;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+.noticeTitle span {
+    padding: 10px 20px; /* 선택적으로 패딩 추가 */
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    color: black;
+}
+.noticeTitle span:hover{
+    background-color: rgb(207, 222,230);
+    color: white;
+}
+.noticeView {
+    width: 100%;
+    border-top: 2px solid #000;
+}
+
+.noticeView .title {
+    border-bottom: 1px dashed #ddd;
+}
+
+.noticeView .title {
+    display: flex;
+    /* Flex 컨테이너로 설정 */
+    justify-content: space-between;
+    /* 자식 요소를 왼쪽과 오른쪽으로 분배 */
+    align-items: center;
+    /* 수직 중앙 정렬 */
+    border-bottom: 1px dashed #ddd;
+}
+
+.noticeView .title p {
+    padding: 15px 15px;
+    font-size: 1.5rem;
+}
+
+.noticeView .title dl {
+    text-align: right;
+    position: relative;
+    padding: 0 20px;
+    padding-top: 1.5%;
+}
+
+.noticeView .title dl dt,
+.noticeView .title dl dd {
+    display: inline-block;
+    font-size: 1rem;
+    color: gray;
+}
+
+.noticeView .cont {
+    height: 300px;
+    padding: 15px;
+    border-bottom: 1px solid #000;
+    line-height: 160%;
+    margin-bottom: 10px;
+    overflow-y: auto;
+}
+
+
+.btList {
+    display: inline-block;
+    min-width: 80px;
+    margin-left: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: rgb(207, 222,230);
+    border: solid 1px rgb(14, 88, 129);
+    color: rgb(14, 88, 129);
+    margin: auto;
+    display: block;
+}
