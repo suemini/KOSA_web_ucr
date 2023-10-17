@@ -14,7 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.kosa.ucr.exception.FindException;
 import com.kosa.ucr.user.dto.Professor;
 
-public class ProfessorOracleMybatisRepository {
+public class ProfessorOracleMybatisRepository implements ProfessorRepository{
 	private SqlSessionFactory sqlSessionFactory;
 
 	public ProfessorOracleMybatisRepository() {

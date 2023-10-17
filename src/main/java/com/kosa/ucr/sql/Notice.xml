@@ -6,6 +6,9 @@
 	<select id="selectByNoticeNo" resultType="Notice">
 	  SELECT * FROM notice WHERE notice_no=#{noticeNO}
 	</select>
+	<insert id="callIncreaseViewCount" statementType="CALLABLE">
+    { CALL increase_view_count(#{noticeNO}) }
+	</insert>
 	<select id="selectAll" resultType="Notice" parameterType="java.util.HashMap"><!--여러개 전달이라 맵타입-->
      SELECT * 
      FROM ( SELECT rownum rn, a.* 

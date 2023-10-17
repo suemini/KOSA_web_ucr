@@ -20,7 +20,7 @@ public class JDBCTest {
 				
 				//3. DB와 연결
 				Connection conn = null;        //@ip주소:포트번호:서비스아이디
-				String ur1 = "jdbc:oracle:thin:@192.168.1.14:1521:xe"; //thin과 oci드라이버가 있음
+				String ur1 = "jdbc:oracle:thin:@localhost:1521:xe"; //thin과 oci드라이버가 있음
 				String user = "ucr";
 				String password = "ucr";
 				try {

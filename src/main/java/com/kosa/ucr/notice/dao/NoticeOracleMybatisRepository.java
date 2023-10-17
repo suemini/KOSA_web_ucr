@@ -15,7 +15,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.kosa.ucr.exception.FindException;
 import com.kosa.ucr.notice.dto.Notice;
 
-public class NoticeOracleMybatisRepository {
+public class NoticeOracleMybatisRepository implements NoticeRepository {
 	private SqlSessionFactory sqlSessionFactory;
 
 	public NoticeOracleMybatisRepository() {
@@ -71,6 +71,9 @@ public class NoticeOracleMybatisRepository {
 		try {
 			session = sqlSessionFactory.openSession(); //Conncection
 			Notice n = session.selectOne("com.kosa.ucr.Notice.NoticeMapper.selectByNoticeNo", noticeNo);
+//			Map<String, Object> parameters = new HashMap<>();
+//	        parameters.put("noticeNO", noticeNo);
+	        session.selectList("com.kosa.ucr.Notice.NoticeMapper.callIncreaseViewCount", noticeNo);
 			if(n != null) {
 				return n;
 			} else {
