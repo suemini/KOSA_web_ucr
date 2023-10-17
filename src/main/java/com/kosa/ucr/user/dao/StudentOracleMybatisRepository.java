@@ -13,7 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.kosa.ucr.exception.FindException;
 import com.kosa.ucr.user.dto.Student;
 
-public class StudentOracleMybatisRepository {
+public class StudentOracleMybatisRepository implements StudentRepository{
 	private SqlSessionFactory sqlSessionFactory;
 
 	public StudentOracleMybatisRepository() {
